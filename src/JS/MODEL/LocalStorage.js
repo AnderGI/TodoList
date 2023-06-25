@@ -48,7 +48,7 @@ const updateTodo = (id, newUpdates) => {
   todos[toUpdateIndex] = toUpdate;
 };
 
-export {
+const LocalStorage = {
   getProjects,
   saveProjects,
   getProjectTodos,
@@ -58,3 +58,5 @@ export {
   removeTodo,
   updateTodo,
 };
+
+export { LocalStorage };

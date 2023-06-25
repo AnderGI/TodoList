@@ -1,4 +1,4 @@
-const ProyectFactory = (title) => {
+export const ProyectFactory = (title) => {
   const proyect = Object.create(ProyectFactory);
 
   proyect.id = Date.now();
