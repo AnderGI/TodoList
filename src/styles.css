@@ -23,7 +23,7 @@ body > nav {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1em 2em;
+  padding: 1em 3em;
   background-color: var(--navBackground);
 }
 
@@ -32,12 +32,12 @@ body > nav span {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 1em;
+  gap: 2em;
 }
 
 body > nav button {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   background-color: transparent;
   border: none;
   border-radius: 5px;
@@ -52,6 +52,7 @@ body > nav button {
 body > nav button:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.75);
+  transform: scale(1.5);
 }
 
 body > nav button:hover div {
@@ -116,4 +117,27 @@ button.today div {
     0% 100%,
     0% 40%
   );
+}
+
+/*Main Content*/
+main {
+  position: relative;
+}
+
+aside.hidden {
+  opacity: 0;
+  height: 0px;
+  transform: translateX(-100%);
+  border-bottom-right-radius: 150%;
+}
+
+aside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background-color: grey;
+  transition: opacity ease 500ms, height ease 500ms, transform ease 500ms,
+    border-bottom-right-radius ease 500ms;
 }
