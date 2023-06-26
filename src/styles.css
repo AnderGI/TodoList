@@ -137,7 +137,113 @@ aside {
   left: 0;
   width: 30%;
   height: 100%;
-  background-color: grey;
+  background-color: #ffedd5;
   transition: opacity ease 500ms, height ease 500ms, transform ease 500ms,
     border-bottom-right-radius ease 500ms;
+}
+
+aside > ul {
+  padding: 0.5em 1em;
+}
+
+aside ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  font-size: 1rem;
+}
+
+aside ul li {
+  padding: 0.25em 1em;
+  border-radius: 5px;
+}
+
+aside ul li:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+aside ul li span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+}
+
+aside svg {
+  width: 2em;
+  height: 2em;
+  stroke: black;
+}
+
+aside div.projectContainer {
+  position: absolute;
+  width: 70%;
+  right: 1em;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 1em;
+}
+
+aside div.projectContainer div.project {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+}
+
+aside div.projectContainer div.project:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+aside div.projectContainer div.project span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+aside div.projectContainer button#newTodo {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 0.1em 0.25em;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+aside div.projectContainer button#newTodo:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+aside div.projectContainer button.deleteProject {
+  background-color: transparent;
+  border: none;
+}
+
+aside div.projectContainer button.deleteProject svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+aside div.projectContainer button.deleteProject svg:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+aside div.projectContainer button svg {
+  width: 1em;
 }
