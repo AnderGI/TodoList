@@ -14,6 +14,11 @@ const rulesForJs = {
   },
 };
 
+const rulesForSVG = {
+  test: /\.svg$/,
+  use: "svg-url-loader",
+};
+
 module.exports = (env, argv) => {
   const { mode } = argv;
   const isProduction = mode === "production";
@@ -25,7 +30,7 @@ module.exports = (env, argv) => {
       clean: true,
     },
     module: {
-      rules: [rulesForCss, rulesForJs],
+      rules: [rulesForCss, rulesForJs, rulesForSVG],
     },
     plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
     devServer: {
