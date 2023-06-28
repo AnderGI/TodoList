@@ -209,7 +209,7 @@ aside div.projectContainer div.project span {
   gap: 1em;
 }
 
-aside div.projectContainer button#newTodo {
+aside div.projectContainer button#newProject {
   width: 80%;
   background-color: transparent;
   border: none;
@@ -224,7 +224,7 @@ aside div.projectContainer button#newTodo {
   border-radius: 5px;
 }
 
-aside div.projectContainer button#newTodo:hover {
+aside div.projectContainer button#newProject:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.25);
 }
@@ -246,4 +246,124 @@ aside div.projectContainer button.deleteProject svg:hover {
 
 aside div.projectContainer button svg {
   width: 1em;
+}
+
+/*Modals*/
+
+dialog {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  transition: transform ease 500ms, opacity ease 500ms;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+dialog.hidden {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+dialog span.delete:hover {
+  cursor: pointer;
+  transform: scale(1.5) rotate(45deg);
+  background-color: var(--navBackground);
+}
+
+dialog span.delete {
+  position: relative;
+  width: 1em;
+  height: 1em;
+  background-color: black;
+  transform: rotate(45deg);
+  clip-path: polygon(
+    35% 0%,
+    65% 0%,
+    65% 35%,
+    100% 35%,
+    100% 60%,
+    65% 60%,
+    65% 100%,
+    35% 100%,
+    35% 60%,
+    0% 60%,
+    0% 35%,
+    35% 35%
+  );
+}
+
+dialog#newProject {
+  width: 60vh;
+  height: 30vh;
+  display: grid;
+  grid-template-rows: 20% 70% 10%;
+  border: none;
+  border-radius: 10px;
+  padding: 1em 2em;
+}
+
+dialog#newProject header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -1em;
+}
+
+dialog#newProject header h6 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+dialog#newProject label {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+dialog#newProject main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.5em;
+}
+
+dialog#newProject main input[type="text"] {
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+dialog#newProject footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5em;
+}
+
+dialog#newProject footer button {
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+}
+
+dialog#newProject footer button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+dialog#newProject footer button:first-child {
+  border: 1px solid black;
+  color: black;
+}
+
+dialog#newProject footer button:first-child:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+dialog#newProject footer button:last-child {
+  background-color: var(--navBackground);
+  color: snow;
 }
