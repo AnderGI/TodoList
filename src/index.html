@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TicTacToe</title>
+    <title>TodoList App</title>
   </head>
   <body>
-    <dialog id="newProject" class="hidden">
+    <dialog class="newProject hidden">
       <header>
         <h6>New project</h6>
-        <span class="delete"></span>
+        <span class="closeDialog"></span>
       </header>
       <main>
         <label for="name">Name : </label>
@@ -17,7 +17,7 @@
         <input type="text" id="name" class="project" maxlength="40" />
       </main>
       <footer>
-        <button>Close</button>
+        <button class="closeDialog">Close</button>
         <button>Add Project</button>
       </footer>
     </dialog>
@@ -262,7 +262,7 @@
           </li>
         </ul>
         <div class="projectContainer">
-          <button id="newProject">
+          <button class="dialogDisplayer newProject">
             <svg
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"

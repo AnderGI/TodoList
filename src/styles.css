@@ -209,7 +209,7 @@ aside div.projectContainer div.project span {
   gap: 1em;
 }
 
-aside div.projectContainer button#newProject {
+aside div.projectContainer button.newProject {
   width: 80%;
   background-color: transparent;
   border: none;
@@ -224,7 +224,7 @@ aside div.projectContainer button#newProject {
   border-radius: 5px;
 }
 
-aside div.projectContainer button#newProject:hover {
+aside div.projectContainer button.newProject:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.25);
 }
@@ -264,13 +264,13 @@ dialog.hidden {
   opacity: 0;
 }
 
-dialog span.delete:hover {
+dialog span.closeDialog:hover {
   cursor: pointer;
   transform: scale(1.5) rotate(45deg);
   background-color: var(--navBackground);
 }
 
-dialog span.delete {
+dialog span.closeDialog {
   position: relative;
   width: 1em;
   height: 1em;
@@ -292,7 +292,7 @@ dialog span.delete {
   );
 }
 
-dialog#newProject {
+dialog.newProject {
   width: 60vh;
   height: 30vh;
   display: grid;
@@ -302,7 +302,7 @@ dialog#newProject {
   padding: 1em 2em;
 }
 
-dialog#newProject header {
+dialog.newProject header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -310,30 +310,30 @@ dialog#newProject header {
   margin-top: -1em;
 }
 
-dialog#newProject header h6 {
+dialog.newProject header h6 {
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.1em;
 }
 
-dialog#newProject label {
+dialog.newProject label {
   font-weight: 600;
   letter-spacing: 0.1em;
 }
 
-dialog#newProject main {
+dialog.newProject main {
   display: flex;
   flex-direction: column;
   padding-top: 1.5em;
 }
 
-dialog#newProject main input[type="text"] {
+dialog.newProject main input[type="text"] {
   padding: 0.5em 1em;
   font-size: 1rem;
   letter-spacing: 0.1em;
 }
 
-dialog#newProject footer {
+dialog.newProject footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -341,7 +341,7 @@ dialog#newProject footer {
   gap: 1.5em;
 }
 
-dialog#newProject footer button {
+dialog.newProject footer button {
   padding: 0.5em 1em;
   border-radius: 5px;
   font-size: 1rem;
@@ -349,21 +349,21 @@ dialog#newProject footer button {
   border: none;
 }
 
-dialog#newProject footer button:hover {
+dialog.newProject footer button:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
 
-dialog#newProject footer button:first-child {
+dialog.newProject footer button:first-child {
   border: 1px solid black;
   color: black;
 }
 
-dialog#newProject footer button:first-child:hover {
+dialog.newProject footer button:first-child:hover {
   background-color: rgba(0, 0, 0, 0.25);
 }
 
-dialog#newProject footer button:last-child {
+dialog.newProject footer button:last-child {
   background-color: var(--navBackground);
   color: snow;
 }

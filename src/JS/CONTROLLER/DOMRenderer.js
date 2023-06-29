@@ -8,7 +8,7 @@ export const CreateDOMProjects = (event) => {
   //create html component
   $("div.projectContainer").insertBefore(
     ProjectComponent(projectNameInputValue),
-    $("button#newProject")
+    $("button.newProject")
   );
 
   projectNameInputValue = "";
