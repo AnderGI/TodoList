@@ -1,13 +1,16 @@
 import { $ } from "../UTILITIES/Selectors";
 import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
+import { ProyectFactory } from "../MODEL/ProjectFactory";
 
 export const CreateDOMProjects = (event) => {
   let projectNameInputValue = $("dialog input[type='text'].project").value;
+
   //create project with the input text value
-  //const newProject = ProyectFactory(projectNameInputValue);
+  const newProject = ProyectFactory(projectNameInputValue);
+
   //create html component
   $("div.projectContainer").insertBefore(
-    ProjectComponent(projectNameInputValue),
+    ProjectComponent(newProject),
     $("button.newProject")
   );
 
