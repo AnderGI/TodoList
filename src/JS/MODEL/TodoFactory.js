@@ -1,32 +1,84 @@
-export const TodoFactory = (todoObj, projectId) => {
-  const todo = Object.create(TodoFactory);
-  const { title, description, dueDate, priority } = todoObj; //the user should  then add if he wants notes and should check the todo by himself
-  todo.id = Date.now(); //only one todo will be generated every time
-  todo.projectId = projectId;
-  todo.title = title;
-  todo.description = description;
-  todo.dueDate = dueDate;
-  todo.priority = priority;
-  todo.notes = [];
-  todo.checked = false;
+const projectIdExtension = (projectId) => ({
+  projectId,
+  getProyectId: function () {
+    return this.projectId;
+  },
+});
 
-  return todo;
+const dueDateExtension = (date) => ({
+  dueDate: date,
+});
+
+const notesExtension = () => ({
+  notes: [],
+  addNotes: function (note) {
+    this.notes.push(note);
+  },
+  getNotes: function () {
+    return this.notes;
+  },
+  removeNote: function (noteId) {
+    this.notes.filter((n) => n.getId() !== noteId);
+  },
+});
+
+const checkedExtension = () => ({
+  _checked: false,
+  toggleChecked: function () {
+    this._checked = !this._checked;
+  },
+  isChecked: function () {
+    return this._checked;
+  },
+});
+
+const prioritiesExtension = () => ({
+  _priority: "low",
+  setPriority: function (p) {
+    this._priority = p;
+  },
+  getPriority: function () {
+    return this._priority;
+  },
+});
+
+const descriptionExtension = () => ({
+  _description,
+  getDescription: function () {
+    return this._description;
+  },
+  setDescription: function (desc) {
+    this._description = desc;
+  },
+});
+
+const extensionsArray = [
+  projectIdExtension,
+  dueDateExtension,
+  notesExtension,
+  checkedExtension,
+  prioritiesExtension,
+  descriptionExtension,
+];
+
+const todoExtensions = (extensions) => {
+  const baseObj = {};
+  extensions.forEach((extension) => {
+    Object.assign(baseObj, extension());
+  });
+  return baseObj;
 };
 
-TodoFactory.prototype.addNotes = function (note) {
-  this.notes.push(note);
-};
+export const TodoFactory = (title) => {
+  const basicData = {
+    title,
+    id: Date.now(),
+    getId: function () {
+      return this.id;
+    },
+  };
 
-TodoFactory.prototype.removeNotes = function (note) {
-  if (this.notes.length > 0) {
-    this.notes = this.notes.filter((n) => n.getId() !== note.getId());
-  }
-};
-
-TodoFactory.prototype.getId = function () {
-  return this.id;
-};
-
-TodoFactory.prototype.getProyectId = function () {
-  return this.projectId;
+  const basic = todoExtensions(extensionsArray);
+  const composite = Object.assign({}, basic);
+  return Object.assign(Object.create(composite), basicData);
 };
