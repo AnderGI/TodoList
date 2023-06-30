@@ -16,6 +16,7 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: var(--backgroundColor);
   overflow: hidden;
+  position: relative;
 }
 
 /*NAVBAR*/
@@ -258,6 +259,55 @@ aside div.projectContainer button svg {
   width: 1em;
 }
 
+/*Main container */
+
+body > main.asideOpen {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 1;
+}
+
+body > main {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+body > main > section {
+  padding: 1em 4em;
+}
+
+body > main > section > div.todoContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+body > main.asideOpen > section {
+  padding: 1em 2em;
+}
+
+main > section {
+  width: 100%;
+  height: 100%;
+}
+main h1 {
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+main .todoContainer {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+main .todoContainer .todo {
+  width: 250px;
+  height: 250px;
+}
+
 /*Modals*/
 
 dialog {
@@ -327,6 +377,7 @@ dialog footer {
   justify-content: flex-end;
   align-items: center;
   gap: 1.5em;
+  padding-top: 1em;
 }
 
 dialog footer button {
@@ -357,25 +408,32 @@ dialog footer button:last-child {
 }
 
 dialog.newProject {
-  width: 60vh;
+  width: 80vh;
   height: 30vh;
-}
-
-dialog.newProject label {
-  font-weight: 600;
-  letter-spacing: 0.1em;
 }
 
 dialog.newProject main {
   display: flex;
   flex-direction: column;
-  padding-top: 1.5em;
+  padding: 1em 0.5em;
+}
+
+dialog.newProject label {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  display: block;
 }
 
 dialog.newProject main input[type="text"] {
+  display: block;
   padding: 0.5em 1em;
   font-size: 1rem;
   letter-spacing: 0.1em;
+}
+
+dialog.newProject footer {
+  padding-top: 0em;
+  padding-bottom: 0.5em;
 }
 
 dialog.newTodo {
@@ -383,9 +441,10 @@ dialog.newTodo {
   height: 70vh;
 }
 
-dialog.newTodo main {
-  display: flex;
-  flex-direction: column;
+dialog.newTodo > main {
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: repeat(3, 1fr);
   gap: 2em;
 }
 
@@ -398,6 +457,11 @@ dialog.newTodo main section:nth-child(2) {
 
 dialog.newTodo main section:nth-child(2) {
   column-gap: 2em;
+}
+
+dialog.newTodo main section label {
+  display: flex;
+  align-items: center;
 }
 
 dialog.newTodo main section:nth-child(1) label {
@@ -446,48 +510,4 @@ dialog.newTodo main section:nth-child(3) textarea {
   resize: none;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
-}
-
-/*Main container */
-body > main.asideOpen {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 1;
-}
-
-body > main {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
-body > main > section {
-  padding: 1em 2em;
-}
-
-body > main > section > div.todoContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1em;
-}
-
-main > section {
-  width: 100%;
-  height: 100%;
-}
-main h1 {
-  text-align: center;
-  letter-spacing: 0.1em;
-}
-
-main .todoContainer {
-  display: grid;
-  grid-auto-flow: row;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-main .todoContainer .todo {
-  width: 250px;
-  height: 250px;
 }

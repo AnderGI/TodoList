@@ -16,7 +16,7 @@ const showHideAside = () => {
 };
 
 const addProyect = () => {
-  const addProjectBtn = $("dialog footer button:last-child");
+  const addProjectBtn = $("dialog.newProject footer button:last-child");
 
   addProjectBtn.addEventListener("click", function (event) {
     let projectNameInput = $("dialog input[type='text'].project");
