@@ -1,8 +1,10 @@
 import "./styles.css";
 import { $ } from "./JS/UTILITIES/Selectors";
 import { registerEvents } from "./JS/VIEW/RegisterEvents";
-import { LocalStorage } from "./JS/MODEL/LocalStorage";
+import { DOMRenderer } from "./JS/VIEW/DOMRenderer";
 window.addEventListener("DOMContentLoaded", function () {
+  //Render Local Storage Elements
+  DOMRenderer.renderLocalStorageProjects();
   registerEvents();
 });
 

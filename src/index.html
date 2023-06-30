@@ -6,10 +6,46 @@
     <title>TodoList App</title>
   </head>
   <body>
+    <dialog class="newTodo hidden">
+      <header>
+        <h6>New Todo</h6>
+        <span class="closeDialog newTodo"></span>
+      </header>
+      <main>
+        <section>
+          <label for="todoTitle">Title : </label>
+          <input type="text" name="todoTitle" id="todoTitle" />
+        </section>
+        <section>
+          <label for="dueDate">Due Date : </label>
+          <input type="datetime-local" name="dueDate" id="dueDate" />
+          <label for="priority">Priority : </label>
+          <select name="priority" id="priority">
+            <option value="high">High &#128561;</option>
+            <option value="medium">Medium &#128550;</option>
+            <option value="low">Low &#128554;</option>
+          </select>
+        </section>
+        <section>
+          <label for="todoDescription">Description : </label>
+          <br / >
+          <textarea
+            name="todoDescription"
+            id="todoDescription"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </section>
+      </main>
+      <footer>
+        <button class="closeDialog newTodo">Close</button>
+        <button>Add Todo</button>
+      </footer>
+    </dialog>
     <dialog class="newProject hidden">
       <header>
         <h6>New project</h6>
-        <span class="closeDialog"></span>
+        <span class="closeDialog newProject"></span>
       </header>
       <main>
         <label for="name">Name : </label>
@@ -17,7 +53,7 @@
         <input type="text" id="name" class="project" maxlength="40" />
       </main>
       <footer>
-        <button class="closeDialog">Close</button>
+        <button class="closeDialog newProject">Close</button>
         <button>Add Project</button>
       </footer>
     </dialog>
@@ -32,7 +68,7 @@
       </span>
       <h1>TodoList App</h1>
       <span>
-        <button class="newTodo">
+        <button class="dialogDisplayer newTodo">
           <div></div>
         </button>
       </span>
@@ -262,31 +298,10 @@
           </li>
         </ul>
         <div class="projectContainer">
-          <button class="dialogDisplayer newProject">
-            <svg
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  fill="#000000"
-                  fill-rule="evenodd"
-                  d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"
-                ></path>
-              </g>
-            </svg>
-            New Project
-          </button>
+          <button class="dialogDisplayer newProject">New Project</button>
         </div>
       </aside>
-      <h1>Project Name</h1>
+      <h1></h1>
     </main>
   </body>
 </html>

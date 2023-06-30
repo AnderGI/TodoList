@@ -25,8 +25,8 @@ const displayDailog = () => {
   //the second class will be the one the dialog has
   const dialogDisplayerBtns = [...$$("button.dialogDisplayer")];
 
-  dialogDisplayerBtns.forEach((btn) => {
-    btn.addEventListener("click", showDialog);
+  dialogDisplayerBtns.forEach((el) => {
+    el.addEventListener("click", showDialog);
   });
 
   function showDialog() {
@@ -41,11 +41,9 @@ const displayDailog = () => {
 const closeDialog = () => {
   //two ways -> span.closeDialog || button.closeDialog (in every dialog)
   const dialogClosingElements = [...$$("dialog .closeDialog")];
-  //all dialogs will have a header (we'll have the span there), main and footer (we'll have the button there)
-  //-> two nested levels until we get the dialog element
-  const dialogEl = dialogClosingElements[0].parentElement.parentElement;
 
   function hideDialog() {
+    const dialogEl = $(`dialog.${[...this.classList][1]}`);
     const isDialogHidden = dialogEl.classList.contains("hidden");
     if (!isDialogHidden) {
       dialogEl.classList.add("hidden");

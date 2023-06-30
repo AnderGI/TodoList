@@ -1,8 +1,10 @@
-const projectIdExtension = (projectId) => ({
+const projectExtension = ({ id, title }) => ({
   projectId,
+  proyectTitle,
+  /*
   getProyectId: function () {
     return this.projectId;
-  },
+  },*/
 });
 
 const dueDateExtension = (date) => ({
@@ -11,6 +13,7 @@ const dueDateExtension = (date) => ({
 
 const notesExtension = () => ({
   notes: [],
+  /*
   addNotes: function (note) {
     this.notes.push(note);
   },
@@ -19,41 +22,45 @@ const notesExtension = () => ({
   },
   removeNote: function (noteId) {
     this.notes.filter((n) => n.getId() !== noteId);
-  },
+  },*/
 });
 
 const checkedExtension = () => ({
-  _checked: false,
+  checked: false,
+  /*
   toggleChecked: function () {
     this._checked = !this._checked;
   },
   isChecked: function () {
     return this._checked;
-  },
+  },*/
 });
 
 const prioritiesExtension = () => ({
-  _priority: "low",
+  priority: "low",
+  /*
   setPriority: function (p) {
     this._priority = p;
   },
   getPriority: function () {
     return this._priority;
-  },
+  },*/
 });
 
 const descriptionExtension = () => ({
-  _description,
+  description,
+  /*
   getDescription: function () {
     return this._description;
   },
   setDescription: function (desc) {
     this._description = desc;
   },
+  */
 });
 
 const extensionsArray = [
-  projectIdExtension,
+  projectExtension,
   dueDateExtension,
   notesExtension,
   checkedExtension,
@@ -73,9 +80,11 @@ export const TodoFactory = (title) => {
   const basicData = {
     title,
     id: Date.now(),
+    /*
     getId: function () {
       return this.id;
     },
+    */
   };
 
   const basic = todoExtensions(extensionsArray);

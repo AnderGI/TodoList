@@ -198,11 +198,13 @@ aside div.projectContainer div.project {
 }
 
 aside div.projectContainer div.project path,
-aside div.projectContainer div.project button.dialogDisplayer svg {
+aside div.projectContainer div.project button.dialogDisplayer *,
+aside div.projectContainer div.project span {
   pointer-events: none;
 }
 
-aside div.projectContainer div.project:hover {
+aside div.projectContainer div.project:hover,
+aside div.projectContainer div.project.hovered {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -263,11 +265,30 @@ dialog {
   z-index: 2;
   transition: transform ease 500ms, opacity ease 500ms;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+  display: grid;
+  grid-template-rows: 20% 70% 10%;
+  border: none;
+  border-radius: 10px;
+  padding: 1em 2em;
 }
 
 dialog.hidden {
   transform: translateY(100%);
   opacity: 0;
+}
+
+dialog header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -1em;
+}
+
+dialog header h6 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 dialog span.closeDialog:hover {
@@ -298,28 +319,44 @@ dialog span.closeDialog {
   );
 }
 
+dialog footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5em;
+}
+
+dialog footer button {
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+}
+
+dialog footer button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+dialog footer button:first-child {
+  border: 1px solid black;
+  color: black;
+}
+
+dialog footer button:first-child:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+dialog footer button:last-child {
+  background-color: var(--navBackground);
+  color: snow;
+}
+
 dialog.newProject {
   width: 60vh;
   height: 30vh;
-  display: grid;
-  grid-template-rows: 20% 70% 10%;
-  border: none;
-  border-radius: 10px;
-  padding: 1em 2em;
-}
-
-dialog.newProject header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: -1em;
-}
-
-dialog.newProject header h6 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
 }
 
 dialog.newProject label {
@@ -339,39 +376,74 @@ dialog.newProject main input[type="text"] {
   letter-spacing: 0.1em;
 }
 
-dialog.newProject footer {
+dialog.newTodo {
+  width: 50vw;
+  height: 70vh;
+}
+
+dialog.newTodo main {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1.5em;
+  flex-direction: column;
+  gap: 2em;
 }
 
-dialog.newProject footer button {
+dialog.newTodo main section:nth-child(1),
+dialog.newTodo main section:nth-child(2) {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1;
+}
+
+dialog.newTodo main section:nth-child(2) {
+  column-gap: 2em;
+}
+
+dialog.newTodo main section:nth-child(1) label {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+dialog.newTodo main section:nth-child(1) input {
+  grid-column-start: 2;
+  grid-column-end: 7;
   padding: 0.5em 1em;
-  border-radius: 5px;
-  font-size: 1rem;
-  background-color: transparent;
-  border: none;
+  letter-spacing: 0.1em;
 }
 
-dialog.newProject footer button:hover {
-  cursor: pointer;
-  transform: scale(1.1);
+dialog.newTodo main section:nth-child(2) label:first-of-type {
+  grid-column-start: 1;
+  grid-column-end: 2;
 }
 
-dialog.newProject footer button:first-child {
-  border: 1px solid black;
-  color: black;
+dialog.newTodo main section:nth-child(2) input {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  padding: 0.5em 1em;
+  letter-spacing: 0.1em;
 }
 
-dialog.newProject footer button:first-child:hover {
-  background-color: rgba(0, 0, 0, 0.25);
+dialog.newTodo main section:nth-child(2) label:last-of-type {
+  grid-column-start: 4;
+  grid-column-end: 5;
 }
 
-dialog.newProject footer button:last-child {
-  background-color: var(--navBackground);
-  color: snow;
+dialog.newTodo main section:nth-child(2) select {
+  grid-column-start: 5;
+  grid-column-end: 7;
+  padding: 0.5em 1em;
+  letter-spacing: 0.1em;
+}
+
+dialog.newTodo main section:nth-child(3) {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 1;
+}
+
+dialog.newTodo main section:nth-child(3) textarea {
+  resize: none;
+  padding: 0.5em 1em;
+  letter-spacing: 0.1em;
 }
 
 /*Main container */
