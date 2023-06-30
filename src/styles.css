@@ -197,7 +197,8 @@ aside div.projectContainer div.project {
   border-radius: 5px;
 }
 
-aside div.projectContainer div.project path {
+aside div.projectContainer div.project path,
+aside div.projectContainer div.project button.dialogDisplayer svg {
   pointer-events: none;
 }
 

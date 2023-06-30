@@ -39,11 +39,10 @@ const removeDOMProject = (event) => {
   //div.project > button.deleteProject > svg
   if (target.nodeName === "svg") {
     const projectDiv = target.parentElement.parentElement;
-    const projectDivId = projectDiv.getAttribute("data-id");
+    const projectDivId = Number(projectDiv.getAttribute("data-id"));
     //remove from localStorgae
     LocalStorage.removeProject(projectDivId);
     projectDiv.remove();
-    LocalStorage.saveProjects();
   }
 };
 
