@@ -7,7 +7,12 @@ import {
 const showHideAside = () => {
   const menuBtn = $("button.menu");
   const aside = $("body > main > aside");
-  menuBtn.addEventListener("click", () => aside.classList.toggle("hidden"));
+  menuBtn.addEventListener("click", () => {
+    aside.classList.toggle("hidden");
+    aside.classList.contains("hidden")
+      ? $("body > main").classList.remove("asideOpen") || ""
+      : $("body > main").classList.add("asideOpen");
+  });
 };
 
 const addProyect = () => {
