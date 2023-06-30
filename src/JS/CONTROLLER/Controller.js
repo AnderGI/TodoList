@@ -3,19 +3,20 @@ import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 import { ProyectFactory } from "../MODEL/ProjectFactory";
 import { LocalStorage } from "../MODEL/LocalStorage";
 
-const renderDOMProjects = (projectObj) => {
-  const divProjectCotainer = $("div.projectContainer");
-  const newProjectBtn = $("button.newProject");
-  //create html component
-  divProjectCotainer.insertBefore(ProjectComponent(projectObj), newProjectBtn);
-};
-
 const closeModal = (event) => {
   //close project modal
   const addProjectBtn = event.target;
   //btn < footer < dialog
   const dialog = addProjectBtn.parentElement.parentElement;
   dialog.classList.add("hidden");
+};
+
+//PROJECT DOM RENDERING
+const renderDOMProjects = (projectObj) => {
+  const divProjectCotainer = $("div.projectContainer");
+  const newProjectBtn = $("button.newProject");
+  //create html component
+  divProjectCotainer.insertBefore(ProjectComponent(projectObj), newProjectBtn);
 };
 
 export const ProjectCreationController = (event) => {
@@ -30,8 +31,14 @@ export const ProjectCreationController = (event) => {
   //render it in html
   renderDOMProjects(newProject);
 
-  //close project modal
+  //close project modal because a ne project has been made
   closeModal(event);
+};
+
+//PROJECT REMOVAL
+const removeLocalStorageProjectController = (id) => {
+  if (typeof id === "string") id = Number(id);
+  LocalStorage.removeProject(id);
 };
 
 const removeDOMProject = (event) => {
@@ -39,9 +46,8 @@ const removeDOMProject = (event) => {
   //div.project > button.deleteProject > svg
   if (target.nodeName === "svg") {
     const projectDiv = target.parentElement.parentElement;
-    const projectDivId = Number(projectDiv.getAttribute("data-id"));
-    //remove from localStorgae
-    LocalStorage.removeProject(projectDivId);
+    const projectDivId = projectDiv.getAttribute("data-id");
+    removeLocalStorageProjectController(projectDivId);
     projectDiv.remove();
   }
 };
