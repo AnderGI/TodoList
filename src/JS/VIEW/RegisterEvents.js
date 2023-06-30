@@ -1,5 +1,8 @@
 import { $, $$ } from "../UTILITIES/Selectors";
-import { CreateDOMProjects } from "../CONTROLLER/DOMRenderer";
+import {
+  ProjectCreationController,
+  ProjectDeletionController,
+} from "../CONTROLLER/Controller";
 
 const showHideAside = () => {
   const menuBtn = $("button.menu");
@@ -12,7 +15,7 @@ const addProyect = () => {
 
   addProjectBtn.addEventListener("click", function (event) {
     let projectNameInput = $("dialog input[type='text'].project");
-    CreateDOMProjects(event); //insert the dom element
+    ProjectCreationController(event); //insert the dom element
     projectNameInput.value = ""; //empty the input everytime the button is being clicked
   });
 };
@@ -66,4 +69,9 @@ export const registerEvents = () => {
 
   //display nay dialog
   displayDailog();
+
+  $("div.projectContainer").addEventListener(
+    "click",
+    ProjectDeletionController
+  );
 };

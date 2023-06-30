@@ -46,9 +46,10 @@ const X_DELETE_SVG = `
   </svg>
 `;
 
-export const ProjectComponent = (title) => {
+export const ProjectComponent = ({ title, id }) => {
   const projectDiv = document.createElement("div");
   projectDiv.setAttribute("class", "project");
+  projectDiv.setAttribute("data-id", id);
   projectDiv.innerHTML = `
       <span>${title}</span>
       <button class="deleteProject">${X_DELETE_SVG}</button>

@@ -11,7 +11,19 @@ const saveProjects = () => {
   localStorage.setItem("projects", JSON.stringify(projects));
 };
 
+const addProject = (project) => {
+  getProjects();
+  projects.push(project);
+  saveProjects(); //temporal it will be saved once the window is closed in an event
+};
+
+const removeProject = (projectId) => {
+  getProjects();
+  projects.filter((p) => p.id !== projectId);
+};
+
 //Todos
+/*
 let todos;
 const getTodos = () => {
   //if empty in localStorgae it will retrieve null (falsy) thus no todos have been saved
@@ -47,16 +59,18 @@ const updateTodo = (id, newUpdates) => {
   //add updates
   todos[toUpdateIndex] = toUpdate;
 };
-
+*/
 const LocalStorage = {
   getProjects,
   saveProjects,
-  getProjectTodos,
+  addProject,
+  removeProject,
+  /* getProjectTodos,
   getTodos,
   saveTodos,
   addTodo,
   removeTodo,
-  updateTodo,
+  updateTodo,*/
 };
 
 export { LocalStorage };
