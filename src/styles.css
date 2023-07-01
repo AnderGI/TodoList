@@ -5,6 +5,9 @@ html {
   height: 100vh;
   --navBackground: #f59e0b;
   --backgroundColor: #fffbeb;
+  --primary: #c5e1a5;
+  --easing: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --duration: 100ms;
 }
 
 body {
@@ -163,7 +166,8 @@ aside ul li {
   border-radius: 5px;
 }
 
-aside ul li:hover {
+aside ul li:hover,
+aside ul li.active {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.75);
 }
@@ -173,6 +177,7 @@ aside ul li span {
   flex-direction: row;
   align-items: center;
   gap: 1em;
+  position: relative;
 }
 
 aside svg {
@@ -181,82 +186,33 @@ aside svg {
   stroke: black;
 }
 
-aside div.projectContainer {
-  position: absolute;
-  width: 70%;
-  right: 1em;
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: 1em;
-}
-
-aside div.projectContainer div.project {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 80%;
-  padding: 0.2em 0.5em;
-  border-radius: 5px;
-}
-
-aside div.projectContainer div.project path,
-aside div.projectContainer div.project button.dialogDisplayer *,
-aside div.projectContainer div.project span {
-  pointer-events: none;
-}
-
-aside div.projectContainer div.project:hover,
-aside div.projectContainer div.project.hovered {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-aside div.projectContainer div.project span {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1em;
-}
-
-aside div.projectContainer button.newProject {
-  width: 80%;
-  background-color: transparent;
-  border: none;
-  padding: 0.2em 0.5em;
-  font-size: 1rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-  font-weight: 600;
-  border-radius: 5px;
-}
-
-aside div.projectContainer button.newProject:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.25);
-}
-
-aside div.projectContainer button.deleteProject {
-  background-color: transparent;
-  border: none;
-}
-
-aside div.projectContainer button.deleteProject svg {
-  width: 1.5em;
-  height: 1.5em;
-}
-
-aside div.projectContainer button.deleteProject svg:hover {
-  cursor: pointer;
-  transform: scale(1.5);
-}
-
-aside div.projectContainer button svg {
+aside button.newProject {
   width: 1em;
+  height: 1em;
+  background-color: black;
+  border: none;
+  clip-path: polygon(
+    35% 0%,
+    65% 0%,
+    65% 35%,
+    100% 35%,
+    100% 60%,
+    65% 60%,
+    65% 100%,
+    35% 100%,
+    35% 60%,
+    0% 60%,
+    0% 35%,
+    35% 35%
+  );
+  position: absolute;
+  right: 1em;
+}
+
+aside button.newProject:hover {
+  transform: scale(1.5);
+  cursor: pointer;
+  background-color: var(--navBackground);
 }
 
 /*Main container */
@@ -282,10 +238,11 @@ body > main > section > div.todoContainer {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1em;
+  justify-content: center;
 }
 
 body > main.asideOpen > section {
-  padding: 1em 2em;
+  padding: 1em;
 }
 
 main > section {
@@ -295,75 +252,6 @@ main > section {
 main h1 {
   text-align: center;
   letter-spacing: 0.1em;
-}
-
-main .todoContainer .todo {
-  width: 10%;
-  height: 250px;
-  border-radius: 10px;
-  padding: 0.5em 1em;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1em;
-  justify-content: flex-end;
-  background: #232526; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #414345,
-    #232526
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #414345,
-    #232526
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-main .todoContainer .todo article {
-  width: 100%;
-}
-
-main .todoContainer .todo h4 {
-  color: white;
-  font-size: 1.25rem;
-  letter-spacing: 0.1em;
-  margin-bottom: -1em;
-}
-
-main .todoContainer .todo p {
-  color: rgba(255, 255, 255, 0.75);
-  letter-spacing: 0.1em;
-}
-
-main .todoContainer .todo button {
-  display: none;
-  opacity: 0;
-  transform: translateY(100%);
-  width: 100%;
-  background-color: transparent;
-  border: 1px solid white;
-  border-radius: 1px;
-  padding: 0.5em;
-  color: white;
-  font-weight: 700;
-  font-size: 1rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-main .todoContainer .todo:hover button {
-  display: block;
-  opacity: 1;
-  transform: translateY(-50%);
-  margin-top: 2em;
-}
-
-main .todoContainer .todo:hover button:hover {
-  border: none;
-  background-color: rgba(255, 255, 255, 0.75);
-  color: black;
-  cursor: pointer;
 }
 
 /*Modals*/
@@ -376,7 +264,7 @@ dialog {
   transition: transform ease 500ms, opacity ease 500ms;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
   display: grid;
-  grid-template-rows: 20% 70% 10%;
+  grid-template-rows: 20% 65% 15%;
   border: none;
   border-radius: 10px;
   padding: 1em 2em;
@@ -392,7 +280,6 @@ dialog header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: -1em;
 }
 
 dialog header h6 {
@@ -433,9 +320,8 @@ dialog footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
   gap: 1.5em;
-  padding-top: 1em;
 }
 
 dialog footer button {
@@ -471,9 +357,14 @@ dialog.newProject {
 }
 
 dialog.newProject main {
-  display: flex;
-  flex-direction: column;
-  padding: 1em 0.5em;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 1em;
+  align-items: center;
+}
+
+dialog.newProject main input[type="text"] {
+  padding: 0.5em 1em;
 }
 
 dialog.newProject label {
@@ -482,90 +373,252 @@ dialog.newProject label {
   display: block;
 }
 
-dialog.newProject main input[type="text"] {
-  display: block;
-  padding: 0.5em 1em;
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-}
-
-dialog.newProject footer {
-  padding-top: 0em;
-  padding-bottom: 0.5em;
-}
-
 dialog.newTodo {
   width: 50vw;
   height: 70vh;
 }
 
-dialog.newTodo > main {
+dialog.newTodo > main form {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: 1;
   grid-template-rows: repeat(3, 1fr);
   gap: 2em;
 }
 
-dialog.newTodo main section:nth-child(1),
-dialog.newTodo main section:nth-child(2) {
+dialog.newTodo form section:nth-child(1),
+dialog.newTodo form section:nth-child(2) {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1;
 }
 
-dialog.newTodo main section:nth-child(2) {
+dialog.newTodo form section:nth-child(2) {
   column-gap: 2em;
 }
 
-dialog.newTodo main section label {
+dialog.newTodo form section label {
   display: flex;
   align-items: center;
 }
 
-dialog.newTodo main section:nth-child(1) label {
+dialog.newTodo form section:nth-child(1) label {
   grid-column-start: 1;
   grid-column-end: 2;
 }
 
-dialog.newTodo main section:nth-child(1) input {
+dialog.newTodo form section:nth-child(1) input {
   grid-column-start: 2;
   grid-column-end: 7;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
 }
 
-dialog.newTodo main section:nth-child(2) label:first-of-type {
+dialog.newTodo form section:nth-child(2) label:first-of-type {
   grid-column-start: 1;
   grid-column-end: 2;
 }
 
-dialog.newTodo main section:nth-child(2) input {
+dialog.newTodo form section:nth-child(2) input {
   grid-column-start: 2;
   grid-column-end: 4;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
 }
 
-dialog.newTodo main section:nth-child(2) label:last-of-type {
+dialog.newTodo form section:nth-child(2) label:last-of-type {
   grid-column-start: 4;
   grid-column-end: 5;
 }
 
-dialog.newTodo main section:nth-child(2) select {
+dialog.newTodo form section:nth-child(2) select {
   grid-column-start: 5;
   grid-column-end: 7;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
 }
 
-dialog.newTodo main section:nth-child(3) {
+dialog.newTodo form section:nth-child(3) {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: 1;
 }
 
-dialog.newTodo main section:nth-child(3) textarea {
+dialog.newTodo form section:nth-child(3) textarea {
   resize: none;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
+}
+
+/*Projects*/
+div.projectContainer {
+  display: grid;
+  grid-template-columns: 1;
+  grid-auto-flow: row;
+  row-gap: 1em;
+  padding: 1em 2em;
+}
+
+dialog input {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+dialog input.invalid {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: red;
+  color: red;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+/*Checkbox animation by henry öhman from codepen*/
+.project {
+  padding: 1em 3em;
+  background-color: #ffedd5;
+  border-radius: 20px;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.checkbox {
+  pointer-events: all;
+  display: inline-block;
+  position: relative;
+  padding: 20px 0 20px 60px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.project .text {
+  display: inline-block;
+  transition: transform var(--duration) var(--easing);
+  font-size: 1rem;
+}
+
+.checkbox:active .text {
+  transform: scale(0.9);
+}
+
+.checkbox .icon {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.checkbox .icon::before,
+.checkbox .icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.checkbox .icon::before {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  border: 2px solid currentColor;
+  background: transparent;
+  transition: background var(--duration) var(--easing);
+}
+
+.checkbox .icon::after {
+  border: 3px solid transparent;
+  transition: height var(--duration) ease-in,
+    width var(--duration) ease-out var(--duration),
+    border-color var(--easing) var(--duration) var(--duration);
+  width: 0px;
+  height: 0px;
+  bottom: 7px;
+  left: 12px;
+  border-radius: 4px;
+  transform-origin: bottom left;
+  /*   transform: rotate(45deg); */
+}
+
+#checkbox:checked + .checkbox .icon::after {
+  width: 8px;
+  height: 20px;
+  border-right-color: currentColor;
+  border-bottom-color: currentColor;
+  transition: width var(--duration) ease-in,
+    height var(--duration) ease-out var(--duration),
+    border-color var(--easing) var(--duration);
+}
+
+#checkbox:checked + .checkbox .icon::before {
+  background: var(--navBackground);
+}
+
+.project span:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+.project .deleteBtn {
+  pointer-events: all;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: black;
+  border: none;
+  transform: rotate(45deg);
+  clip-path: polygon(
+    35% 0%,
+    65% 0%,
+    65% 35%,
+    100% 35%,
+    100% 60%,
+    65% 60%,
+    65% 100%,
+    35% 100%,
+    35% 60%,
+    0% 60%,
+    0% 35%,
+    35% 35%
+  );
+}
+
+.project .deleteBtn:hover,
+.project .expandContent:hover {
+  transform: scale(1.5) rotate(45deg);
+  cursor: pointer;
+  background-color: var(--navBackground);
+}
+
+.project .expandContent {
+  pointer-events: all;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: black;
+  border: none;
+  clip-path: polygon(
+    0% 20%,
+    60% 20%,
+    60% 0%,
+    100% 50%,
+    60% 100%,
+    60% 80%,
+    0% 80%
+  );
+  transform: rotate(90deg);
+}
+
+.project .expandContent:hover {
+  cursor: pointer;
+  transform: scale(1.5) rotate(90deg);
+  background-color: var(--navBackground);
 }

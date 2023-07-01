@@ -2,9 +2,13 @@ import "./styles.css";
 import { $ } from "./JS/UTILITIES/Selectors";
 import { registerEvents } from "./JS/VIEW/RegisterEvents";
 import { DOMRenderer } from "./JS/VIEW/DOMRenderer";
+import { renderAside } from "./JS/VIEW/UI";
 window.addEventListener("DOMContentLoaded", function () {
   //Render Local Storage Elements
-  DOMRenderer.renderLocalStorageProjects();
+
+  //DOMRenderer.renderLocalStorageProjects();
+
+  renderAside();
   registerEvents();
 });
 

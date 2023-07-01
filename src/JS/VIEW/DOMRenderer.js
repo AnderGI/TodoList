@@ -1,4 +1,4 @@
-import { LocalStorage } from "../MODEL/LocalStorage";
+import { LocalStorage } from "../MODEL/LocalStorageSingleton";
 import { $ } from "../UTILITIES/Selectors";
 import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 //PROJECT DOM RENDERING

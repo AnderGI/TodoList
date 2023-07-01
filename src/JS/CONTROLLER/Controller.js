@@ -1,71 +1,74 @@
 import { $, $$ } from "../UTILITIES/Selectors";
 import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 import { ProyectFactory } from "../MODEL/ProjectFactory";
-import { LocalStorage } from "../MODEL/LocalStorage";
+import { LocalStorage } from "../MODEL/LocalStorageSingleton";
 import { DOMRenderer } from "../VIEW/DOMRenderer";
+import { TodoFactory } from "../MODEL/TodoFactory";
 
-const closeModal = (event) => {
-  //close project modal
-  const addProjectBtn = event.target;
-  //btn < footer < dialog
-  const dialog = addProjectBtn.parentElement.parentElement;
-  dialog.classList.add("hidden");
-};
+export function handleProjectCreation() {
+  //validar
+  if (validateProjectCreation()) {
+    $("dialog.newProject").classList.add("hidden");
+    $("div.projectContainer").append(
+      ProjectComponent($("dialog.newProject #name").value)
+    );
+  }
+  //crear, renderizar, guardar en local storage
+}
 
-export const ProjectCreationController = (event) => {
-  //create project with the input text value
-  const newProject = ProyectFactory(
-    $("dialog input[type='text'].project").value
-  );
+function validateProjectCreation() {
+  const input = $("dialog.newProject #name");
+  let valid = false;
+  if (input.value === "") {
+    input.focus();
+    input.value = "the field must not be empty";
+    input.classList.add("invalid");
+    input.addEventListener("input", function () {
+      this.classList.remove("invalid");
+    });
+  } else {
+    valid = true;
+  }
+  return valid;
+}
 
-  //save in localstorage
-  LocalStorage.addProject(newProject);
-
-  //render it in html
-  DOMRenderer.renderDOMProjects(newProject);
-
-  //close project modal because a ne project has been made
-  closeModal(event);
-};
-
-//PROJECT REMOVAL
-const removeLocalStorageProjectController = (id) => {
-  if (typeof id === "string") id = Number(id);
-  LocalStorage.removeProject(id);
-};
-
-const removeDOMProject = (target) => {
-  //div.project > button.deleteProject > svg
-  const projectDiv = target.parentElement.parentElement;
-  const projectDivId = projectDiv.getAttribute("data-id");
-  removeLocalStorageProjectController(projectDivId);
-  projectDiv.remove();
-  $("main h1").textContent = "";
-};
-
-const handleDIVProjectClick = (target) => {
-  //add classlist when clicked and remove the ones that have it
-  const hoveredProyects = [
-    ...target.parentElement.getElementsByClassName("project"),
-  ].filter((p) => p.classList.contains("hovered"));
-
-  for (const project of hoveredProyects) {
-    project.classList.remove("hovered");
+function validateTodo() {
+  const todoForm = $("dialog.newTodo form");
+  let valid = false;
+  if (
+    todoForm.elements.todoTitle.value === "" ||
+    todoForm.elements.todoTitle.value.toLowerCase() ===
+      "the field must not be empty"
+  ) {
+    todoForm.elements.todoTitle.focus();
+    todoForm.elements.todoTitle.value = "This field is required";
+  } else if (
+    todoForm.elements.todoDescription.value === "" ||
+    todoForm.elements.todoDescription.value.toLowerCase() ===
+      "this field is required"
+  ) {
+    todoForm.elements.todoDescription.focus();
+    todoForm.elements.todoDescription.value = "This field is required";
+  } else if (todoForm.elements.dueDate.value === "") {
+    todoForm.elements.dueDate.focus();
+  } else {
+    valid = true;
   }
 
-  target.classList.add("hovered");
+  return valid;
+}
 
-  //add title to main
-  $("main h1").textContent = target.textContent;
+const createTodo = () => {
+  const todoForm = $("dialog.newTodo form");
+  const todo = TodoFactory(todoForm.elements.todoTitle.value);
 };
 
-export const ProjectDeletionController = (event) => {
-  const target = event.target;
-  if (target.nodeName === "svg") {
-    removeDOMProject(target);
-  } else if (target.nodeName === "DIV" && target.className === "project") {
-    //handle click over div.projects
-    //add class to div and render its name in main
-    handleDIVProjectClick(target); //<- div.project
+export const TodoCreationController = () => {
+  //validar todo y si es valido crealo
+  if (validateTodo()) {
+    //createTodo();
   }
+
+  //guardarlo en el localstorage´
+  //añadirlo al dom y renderizarlo
 };

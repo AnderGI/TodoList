@@ -2,7 +2,10 @@ import { $, $$ } from "../UTILITIES/Selectors";
 import {
   ProjectCreationController,
   ProjectDeletionController,
+  TodoCreationController,
+  handleProjectCreation,
 } from "../CONTROLLER/Controller";
+import { renderAsideFieldTitle } from "./UI";
 
 const showHideAside = () => {
   const menuBtn = $("button.menu");
@@ -12,16 +15,6 @@ const showHideAside = () => {
     aside.classList.contains("hidden")
       ? $("body > main").classList.remove("asideOpen") || ""
       : $("body > main").classList.add("asideOpen");
-  });
-};
-
-const addProyect = () => {
-  const addProjectBtn = $("dialog.newProject footer button:last-child");
-
-  addProjectBtn.addEventListener("click", function (event) {
-    let projectNameInput = $("dialog input[type='text'].project");
-    ProjectCreationController(event); //insert the dom element
-    projectNameInput.value = ""; //empty the input everytime the button is being clicked
   });
 };
 
@@ -60,12 +53,35 @@ const closeDialog = () => {
   });
 };
 
+const asideElementsClick = () => {
+  //whenever one of the elements of the aside is being clicked
+  //add class to element and display title
+  const asideElements = [...$$("aside > ul > li")];
+
+  asideElements.forEach((el) =>
+    el.addEventListener("click", toogleActiveClass)
+  );
+
+  function toogleActiveClass() {
+    const activeElements = asideElements.filter((el) =>
+      el.classList.contains("active")
+    );
+    if (activeElements.length > 0) {
+      activeElements.forEach((el) => el.classList.remove("active"));
+    }
+    this.classList.add("active");
+    renderAsideFieldTitle(this);
+  }
+};
+
+const proyectBtnClicked = () => {
+  const addProjectBtn = $("dialog.newProject footer button:last-child");
+  addProjectBtn.addEventListener("click", handleProjectCreation);
+};
+
 export const registerEvents = () => {
   //ASIDE
   showHideAside();
-
-  //New Proyect Btn
-  addProyect();
 
   //close any dialog
   closeDialog();
@@ -73,8 +89,7 @@ export const registerEvents = () => {
   //display nay dialog
   displayDailog();
 
-  $("div.projectContainer").addEventListener(
-    "click",
-    ProjectDeletionController
-  );
+  asideElementsClick();
+
+  proyectBtnClicked();
 };

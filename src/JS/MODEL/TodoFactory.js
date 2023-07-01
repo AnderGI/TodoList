@@ -1,6 +1,8 @@
-const projectExtension = ({ id, title }) => ({
-  projectId,
-  proyectTitle,
+//FUNCTIONS ARE COMMENTED SINCE THEY CANNOT BE STORED IN LOCAL STORAGE
+
+const projectExtension = () => ({
+  projectId: null,
+  proyectTitle: null,
   /*
   getProyectId: function () {
     return this.projectId;
@@ -9,20 +11,6 @@ const projectExtension = ({ id, title }) => ({
 
 const dueDateExtension = (date) => ({
   dueDate: date,
-});
-
-const notesExtension = () => ({
-  notes: [],
-  /*
-  addNotes: function (note) {
-    this.notes.push(note);
-  },
-  getNotes: function () {
-    return this.notes;
-  },
-  removeNote: function (noteId) {
-    this.notes.filter((n) => n.getId() !== noteId);
-  },*/
 });
 
 const checkedExtension = () => ({
@@ -48,7 +36,7 @@ const prioritiesExtension = () => ({
 });
 
 const descriptionExtension = () => ({
-  description,
+  description: null,
   /*
   getDescription: function () {
     return this._description;
@@ -62,7 +50,7 @@ const descriptionExtension = () => ({
 const extensionsArray = [
   projectExtension,
   dueDateExtension,
-  notesExtension,
+  projectExtension,
   checkedExtension,
   prioritiesExtension,
   descriptionExtension,
