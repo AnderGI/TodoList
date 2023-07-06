@@ -481,7 +481,6 @@ dialog input.invalid {
   margin: auto;
   display: flex;
   flex-direction: column;
-  pointer-events: none;
   gap: 1.5em;
 }
 
@@ -490,15 +489,6 @@ dialog input.invalid {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-}
-
-.checkbox {
-  pointer-events: all;
-  display: inline-block;
-  position: relative;
-  padding: 20px 0 20px 60px;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .project .text {
@@ -517,7 +507,6 @@ dialog input.invalid {
 }
 
 .project .deleteBtn {
-  pointer-events: all;
   height: 1.5em;
   width: 1.5em;
   background-color: black;
@@ -547,7 +536,6 @@ dialog input.invalid {
 }
 
 .project .expandContent {
-  pointer-events: all;
   height: 1.5em;
   width: 1.5em;
   background-color: black;
@@ -577,4 +565,133 @@ dialog input.invalid {
 
 .project section.main.expanded {
   display: block;
+}
+
+.project section.main div.todo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project section.main div.todo > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+.project section.main div.todo > div:last-child {
+  gap: 2em;
+}
+
+.project section.main div.todo > div:last-child div.showMore {
+  display: grid;
+  grid-template-rows: 1;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 0.25em;
+}
+
+.project section.main div.todo > div:last-child div.showMore:hover {
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+.project section.main div.todo > div:last-child div.showMore:hover div {
+  background-color: var(--navBackground);
+}
+
+.project section.main div.todo > div:last-child div.showMore div {
+  border-radius: 50%;
+  background-color: black;
+  width: 0.5em;
+  height: 0.5em;
+}
+
+.project section.main input[type="checkbox"] {
+  width: 2em;
+  height: 2em;
+  accent-color: var(--navBackground);
+}
+
+.project section.main input[type="checkbox"]:checked {
+  -webkit-animation: wiggle 0.4s ease;
+  animation: wiggle 0.4s ease;
+}
+
+.project section.main input[type="checkbox"]:checked + span.todoTitle {
+  -webkit-animation: wiggle 0.4s ease;
+  animation: wiggle 0.4s ease;
+}
+
+.project section.main input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
+.project section.main span.todoTitle {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+@-webkit-keyframes wiggle {
+  from {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  30% {
+    -webkit-transform: scale(1.25, 0.75);
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    -webkit-transform: scale(0.75, 1.25);
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    -webkit-transform: scale(1.15, 0.85);
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    -webkit-transform: scale(1.05, 0.95);
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+@keyframes wiggle {
+  from {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+  30% {
+    -webkit-transform: scale(1.25, 0.75);
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    -webkit-transform: scale(0.75, 1.25);
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    -webkit-transform: scale(1.15, 0.85);
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    -webkit-transform: scale(0.95, 1.05);
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    -webkit-transform: scale(1.05, 0.95);
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
 }
