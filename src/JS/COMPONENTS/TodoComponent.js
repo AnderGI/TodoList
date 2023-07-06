@@ -4,11 +4,18 @@ export const TodoComponent = ({ title, dueDate }) => {
   const todoDiv = document.createElement("div");
   todoDiv.setAttribute("class", "todo");
   todoDiv.innerHTML = `
-    <article>
-        <h4>${title}</h4>
-        <p>${timeDistanceFromNow(Date.parse(dueDate))}</p>
-        <button>Read More</button>
-    </article>
+  <div>
+    <input type="checkbox" name="todoChecked" id="todoChecked" />
+    <span class="todoTitle">Un titulo</span>
+  </div>
+  <div>
+    <div class="showMore">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <button class="deleteBtn"></button>
+  </div>
   `;
   return todoDiv;
 };

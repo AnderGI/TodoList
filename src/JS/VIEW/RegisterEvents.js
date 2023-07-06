@@ -76,7 +76,10 @@ const asideElementsClick = () => {
 
 const proyectBtnClicked = () => {
   const addProjectBtn = $("dialog.newProject footer button:last-child");
-  addProjectBtn.addEventListener("click", handleProjectCreation);
+  addProjectBtn.addEventListener("click", function () {
+    handleProjectCreation();
+    expandTodoContainer();
+  });
 };
 
 const expandTodoContainer = () => {
@@ -101,6 +104,4 @@ export const registerEvents = () => {
   asideElementsClick();
 
   proyectBtnClicked();
-
-  expandTodoContainer();
 };

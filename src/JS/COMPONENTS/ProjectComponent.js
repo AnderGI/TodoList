@@ -3,17 +3,19 @@ export const ProjectComponent = (title) => {
   projectDiv.setAttribute("class", "project");
 
   projectDiv.innerHTML = `
-  <span>
-    <input type="checkbox" id="checkbox" hidden />
-    <label for="checkbox" class="checkbox">
-      <span class="icon"></span>
+  <section class="header">
+    <span>
       <span class="text">${title}</span>
-    </label>
-  </span>
-  <span>
-    <button class="expandContent"></button>
-    <button class="deleteBtn"></button>
-  </span>
+    </span>
+    <span>
+      <button class="expandContent"></button>
+      <button class="deleteBtn"></button>
+    </span>
+  </section>
+  <section class="main">
+    
+  </section>
+
     `;
   return projectDiv;
 };
