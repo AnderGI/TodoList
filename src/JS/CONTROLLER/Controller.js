@@ -9,9 +9,9 @@ export function handleProjectCreation() {
   //validar
   if (validateProjectCreation()) {
     $("dialog.newProject").classList.add("hidden");
-    $("div.projectContainer").append(
-      ProjectComponent($("dialog.newProject #name").value)
-    );
+    const project = ProyectFactory($("dialog.newProject #name").value);
+    $("div.projectContainer").append(ProjectComponent(project));
+    LocalStorage.addProject(project);
   }
   //crear, renderizar, guardar en local storage
 }

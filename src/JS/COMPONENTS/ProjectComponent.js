@@ -1,6 +1,7 @@
-export const ProjectComponent = (title) => {
+export const ProjectComponent = ({ title, id }) => {
   const projectDiv = document.createElement("div");
   projectDiv.setAttribute("class", "project");
+  projectDiv.setAttribute("data-id", id);
 
   projectDiv.innerHTML = `
   <section class="header">
