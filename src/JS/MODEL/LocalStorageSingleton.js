@@ -18,6 +18,9 @@ const addProject = (project) => {
 
 const removeProject = (projectId) => {
   projects = getProjects();
+  if (typeof projectId !== "number") {
+    projectId = parseInt(projectId);
+  }
   projects = projects.filter((p) => p.id !== projectId);
   saveProjects();
 };
