@@ -483,10 +483,16 @@ dialog input.invalid {
   width: 80%;
   margin: auto;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   pointer-events: none;
+  gap: 1.5em;
+}
+
+.project section.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .checkbox {
@@ -605,20 +611,29 @@ dialog input.invalid {
   width: 1.5em;
   background-color: black;
   border: none;
-  clip-path: polygon(
-    0% 20%,
-    60% 20%,
-    60% 0%,
-    100% 50%,
-    60% 100%,
-    60% 80%,
-    0% 80%
-  );
-  transform: rotate(90deg);
+  -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
 }
 
-.project .expandContent:hover {
+.project .expandContent:hover,
+.project .expandContent.clicked {
   cursor: pointer;
   transform: scale(1.5) rotate(90deg);
   background-color: var(--navBackground);
+}
+
+/*Project Todo section*/
+.project section.main {
+  padding: 1em 2em;
+  display: grid;
+  grid-template-columns: 1;
+  grid-auto-flow: row;
+  row-gap: 0.5em;
+  background-color: var(--backgroundColor);
+  border-radius: 10px;
+  display: none;
+}
+
+.project section.main.expanded {
+  display: block;
 }

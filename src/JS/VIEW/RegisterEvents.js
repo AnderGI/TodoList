@@ -79,6 +79,15 @@ const proyectBtnClicked = () => {
   addProjectBtn.addEventListener("click", handleProjectCreation);
 };
 
+const expandTodoContainer = () => {
+  const expandTodContainerBtn = $("div.project button.expandContent");
+  expandTodContainerBtn.addEventListener("click", function () {
+    const mainSection = $("div.project section.main");
+    mainSection.classList.toggle("expanded");
+    this.classList.toggle("clicked");
+  });
+};
+
 export const registerEvents = () => {
   //ASIDE
   showHideAside();
@@ -92,4 +101,6 @@ export const registerEvents = () => {
   asideElementsClick();
 
   proyectBtnClicked();
+
+  expandTodoContainer();
 };
