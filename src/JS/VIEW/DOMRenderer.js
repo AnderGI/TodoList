@@ -1,12 +1,14 @@
 import { LocalStorage } from "../MODEL/LocalStorageSingleton";
 import { $ } from "../UTILITIES/Selectors";
 import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
+import { expandTodoContainer } from "./RegisterEvents";
 //PROJECT DOM RENDERING
 const renderDOMProjects = (projectObj) => {
   const divProjectCotainer = $("div.projectContainer");
-  const newProjectBtn = $("button.dialogDisplayer.newProject");
   //create html component
-  divProjectCotainer.insertBefore(ProjectComponent(projectObj), newProjectBtn);
+  const DOMProject = ProjectComponent(projectObj);
+  divProjectCotainer.append(DOMProject);
+  expandTodoContainer();
 };
 
 const renderLocalStorageProjects = () => {

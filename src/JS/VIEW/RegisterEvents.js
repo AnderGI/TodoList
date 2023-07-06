@@ -5,7 +5,7 @@ import {
   TodoCreationController,
   handleProjectCreation,
 } from "../CONTROLLER/Controller";
-import { renderAsideFieldTitle } from "./UI";
+import { renderAsideFieldElements } from "./UI";
 
 const showHideAside = () => {
   const menuBtn = $("button.menu");
@@ -70,7 +70,7 @@ const asideElementsClick = () => {
       activeElements.forEach((el) => el.classList.remove("active"));
     }
     this.classList.add("active");
-    renderAsideFieldTitle(this);
+    renderAsideFieldElements(this);
   }
 };
 
@@ -82,7 +82,7 @@ const proyectBtnClicked = () => {
   });
 };
 
-const expandTodoContainer = () => {
+export const expandTodoContainer = () => {
   const expandTodContainerBtn = $("div.project button.expandContent");
   expandTodContainerBtn.addEventListener("click", function () {
     const mainSection = $("div.project section.main");

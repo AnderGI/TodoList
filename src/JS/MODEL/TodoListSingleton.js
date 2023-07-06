@@ -1,33 +1,5 @@
 import { DialogDisplayerButton } from "../COMPONENTS/DialogDisplayerButton";
 
-const INBOX_SVG = `<svg
-        viewBox="0 0 32 32"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        stroke="#000000"
-        >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-        id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-        <path
-            stroke="#000000"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M17 27H8c-1.5 0-3-1.5-3-3v-8m0 0h5.5s1 3.5 5.5 3.5 5.5-3.5 5.5-3.5H27L23 5H9L5 16zM25 28v-8M21 24h8"
-        ></path>
-        </g>
-    </svg>`;
-
-const inboxField = {
-  image: INBOX_SVG,
-  name: "Inbox",
-};
-
 const ALL_SVG = `<svg
 fill="#000000"
 viewBox="0 0 32 32"
@@ -229,7 +201,6 @@ const projectsField = {
 };
 
 const todoListFields = [
-  inboxField,
   allField,
   importantField,
   next7DaysField,
