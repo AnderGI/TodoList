@@ -35,5 +35,3 @@ export function renderAsideFieldElements(element) {
   //set content
   contentRenderer[title.textContent.toLowerCase()]();
 }
-
-function renderProjectSection() {}

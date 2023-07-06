@@ -14,7 +14,7 @@ export const TodoComponent = ({ title, dueDate }) => {
       <div></div>
       <div></div>
     </div>
-    <button class="deleteBtn"></button>
+    <button class="deleteBtn deleteTodo"></button>
   </div>
   `;
   return todoDiv;

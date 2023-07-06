@@ -472,6 +472,13 @@ dialog input.invalid {
   letter-spacing: 0.1em;
 }
 
+dialog.eliminationWarning h6 {
+  color: red;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
 /*Checkbox animation by henry öhman from codepen*/
 .project {
   padding: 1em 3em;

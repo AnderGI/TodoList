@@ -10,7 +10,7 @@ export const ProjectComponent = ({ title, id }) => {
     </span>
     <span>
       <button class="expandContent"></button>
-      <button class="deleteBtn"></button>
+      <button class="deleteBtn deleteProject"></button>
     </span>
   </section>
   <section class="main">

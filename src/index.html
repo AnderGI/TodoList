@@ -6,6 +6,23 @@
     <title>TodoList App</title>
   </head>
   <body>
+    <dialog class="eliminationWarning hidden">
+      <header>
+        <h6>WARNING!!!!</h6>
+        <span class="closeDialog eliminationWarning"></span>
+      </header>
+      <main>
+        <p>
+          This action will cause to lose
+          <strong><big>permanently all</big></strong> all the information
+          contained within (todos included). Do you want to go-ahead?
+        </p>
+      </main>
+      <footer>
+        <button class="closeDialog eliminationWarning">Close</button>
+        <button class="remove">Remove All</button>
+      </footer>
+    </dialog>
     <dialog class="newTodo hidden">
       <header>
         <h6>New Todo</h6>
