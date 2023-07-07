@@ -2,7 +2,6 @@ import { $, $$ } from "../UTILITIES/Selectors";
 import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 import { ProyectFactory } from "../MODEL/ProjectFactory";
 import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
-import { DOMRenderer } from "../VIEW/DOMRenderer";
 import { TodoFactory } from "../MODEL/TodoFactory";
 
 export function handleProjectCreation() {

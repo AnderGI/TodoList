@@ -513,6 +513,7 @@ dialog.eliminationWarning h6 {
   gap: 1em;
 }
 
+div.todo .deleteBtn,
 .project .deleteBtn {
   height: 1.5em;
   width: 1.5em;
@@ -535,6 +536,7 @@ dialog.eliminationWarning h6 {
   );
 }
 
+div.todo .deleteBtn:hover,
 .project .deleteBtn:hover,
 .project .expandContent:hover {
   transform: scale(1.5) rotate(45deg);
@@ -574,13 +576,16 @@ dialog.eliminationWarning h6 {
   display: block;
 }
 
+div.todo,
 .project section.main div.todo {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 0.5em 3em;
 }
 
+div.todo > div,
 .project section.main div.todo > div {
   display: flex;
   flex-direction: row;
@@ -589,10 +594,12 @@ dialog.eliminationWarning h6 {
   gap: 1em;
 }
 
+div.todo > div:last-child,
 .project section.main div.todo > div:last-child {
   gap: 2em;
 }
 
+div.todo > div:last-child div.showMore,
 .project section.main div.todo > div:last-child div.showMore {
   display: grid;
   grid-template-rows: 1;
@@ -600,15 +607,18 @@ dialog.eliminationWarning h6 {
   column-gap: 0.25em;
 }
 
+div.todo > div:last-child div.showMore:hover,
 .project section.main div.todo > div:last-child div.showMore:hover {
   cursor: pointer;
   transform: scale(1.5);
 }
 
+div.todo > div:last-child div.showMore:hover div,
 .project section.main div.todo > div:last-child div.showMore:hover div {
   background-color: var(--navBackground);
 }
 
+div.todo > div:last-child div.showMore div,
 .project section.main div.todo > div:last-child div.showMore div {
   border-radius: 50%;
   background-color: black;
@@ -616,26 +626,31 @@ dialog.eliminationWarning h6 {
   height: 0.5em;
 }
 
+div.todo input[type="checkbox"],
 .project section.main input[type="checkbox"] {
   width: 2em;
   height: 2em;
   accent-color: var(--navBackground);
 }
 
+div.todo input[type="checkbox"]:checked,
 .project section.main input[type="checkbox"]:checked {
   -webkit-animation: wiggle 0.4s ease;
   animation: wiggle 0.4s ease;
 }
 
+div.todo input[type="checkbox"]:checked + span.todoTitle,
 .project section.main input[type="checkbox"]:checked + span.todoTitle {
   -webkit-animation: wiggle 0.4s ease;
   animation: wiggle 0.4s ease;
 }
 
+div.todo input[type="checkbox"]:hover,
 .project section.main input[type="checkbox"]:hover {
   cursor: pointer;
 }
 
+div.todo span.todoTitle,
 .project section.main span.todoTitle {
   font-size: 1rem;
   letter-spacing: 0.1em;

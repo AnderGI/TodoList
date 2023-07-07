@@ -3,13 +3,14 @@ import {
   TodoCreationController,
   handleProjectCreation,
 } from "../CONTROLLER/Controller";
-import { renderAsideFieldElements } from "./UI";
+import { renderAsideFieldContent } from "./UI";
 
 const showHideAside = () => {
   const menuBtn = $("button.menu");
   const aside = $("body > main > aside");
   menuBtn.addEventListener("click", () => {
     aside.classList.toggle("hidden");
+    //the main container will have a different styling if aside is displayed
     aside.classList.contains("hidden")
       ? $("body > main").classList.remove("asideOpen") || ""
       : $("body > main").classList.add("asideOpen");
@@ -68,7 +69,7 @@ const asideElementsClick = () => {
       activeElements.forEach((el) => el.classList.remove("active"));
     }
     this.classList.add("active");
-    renderAsideFieldElements(this);
+    renderAsideFieldContent(this);
   }
 };
 
@@ -88,7 +89,7 @@ const handleProjectAndTodoContainerClicks = (e) => {
     target.classList.contains("expandContent")
   ) {
     //expand
-    expandProjectOrTodo();
+    expandTodoContainer();
   }
 
   //remove button -> element.deleteBtn

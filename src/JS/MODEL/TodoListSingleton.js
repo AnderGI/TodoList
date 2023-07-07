@@ -23,6 +23,7 @@ xmlns="http://www.w3.org/2000/svg"
 const allField = {
   image: ALL_SVG,
   name: "All",
+  active: true,
 };
 
 const IMPORTANT_SVG = `<svg

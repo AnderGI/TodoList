@@ -1,13 +1,14 @@
 import { timeDistanceFromNow } from "../UTILITIES/DateFns";
 
-export const TodoComponent = ({ title, dueDate }) => {
+export const TodoComponent = (todoObj) => {
+  const { title, dueDate } = todoObj;
   const todoDiv = document.createElement("div");
   todoDiv.setAttribute("class", "todo");
   todoDiv.innerHTML = `
   <div>
     <input type="checkbox" name="todoChecked" id="todoChecked" />
-    <span class="todoTitle">Un titulo</span>
-  </div>
+    <span class="todoTitle">${title}, ${timeDistanceFromNow(dueDate)}</span>
+    </div>
   <div>
     <div class="showMore">
       <div></div>
