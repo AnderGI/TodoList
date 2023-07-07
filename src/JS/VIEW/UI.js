@@ -6,6 +6,8 @@ import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
 import { TodoComponent } from "../COMPONENTS/TodoComponent";
 
+const divProjectCotainer = $("div.projectContainer");
+
 export function renderAside() {
   const aside = $("body > main > aside");
   const ul = document.createElement("ul");
@@ -29,22 +31,25 @@ const contentRenderer = {
 };
 
 export function renderAsideFieldContent() {
+  divProjectCotainer.replaceChildren();
+  //set content
+  renderActiveAsideFieldContent();
+}
+
+function renderActiveAsideFieldContent() {
+  //get the list
   const asideElements = [...$$("aside > ul > li")];
+  //get the active element from it
   const activeElement = asideElements.filter((el) =>
     el.classList.contains("active")
   )[0];
-  console.dir(activeElement);
-  //set title
-  const title = $("body > main > section > h1");
+  //set the data from the active element
+  const titleEl = $("body > main > section > h1");
   const asideFieldText = activeElement.firstChild.childNodes[1].textContent;
-  title.textContent = asideFieldText;
-  //remove elements from container
-  const divProjectCotainer = $("div.projectContainer");
-  divProjectCotainer.replaceChildren();
-  //set content
-  contentRenderer[title.textContent.toLowerCase()]();
+  titleEl.textContent = asideFieldText;
+  //render the dom components taking into account the active element
+  contentRenderer[titleEl.textContent.toLowerCase()]();
 }
-const divProjectCotainer = $("div.projectContainer");
 
 //PROJECT DOM RENDERING
 const renderDOMProjects = (projectObj) => {
@@ -66,6 +71,7 @@ const renderDOMTodo = (todoObj) => {
   const DOMTodo = TodoComponent(todoObj);
   divProjectCotainer.append(DOMTodo);
 };
+
 function renderAllTodosField() {
   const todos = TodoLocalStorage.getTodos();
   if (todos.length > 0) {

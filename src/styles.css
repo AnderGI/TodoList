@@ -51,14 +51,11 @@ body > nav button {
   align-items: center;
 }
 
-body > nav button:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.75);
-  transform: scale(1.5);
-}
-
+body > nav button:hover,
 body > nav button:hover div {
-  background-color: var(--navBackground);
+  cursor: pointer;
+
+  transform: scale(1.5);
 }
 
 body > nav button > div {

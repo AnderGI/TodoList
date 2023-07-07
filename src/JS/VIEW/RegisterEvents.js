@@ -69,7 +69,7 @@ const asideElementsClick = () => {
       activeElements.forEach((el) => el.classList.remove("active"));
     }
     this.classList.add("active");
-    renderAsideFieldContent(this);
+    renderAsideFieldContent();
   }
 };
 
