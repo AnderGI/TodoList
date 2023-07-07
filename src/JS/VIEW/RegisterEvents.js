@@ -4,6 +4,7 @@ import {
   handleProjectCreation,
 } from "../CONTROLLER/Controller";
 import { renderAsideFieldElements } from "./UI";
+import { LocalStorage } from "../MODEL/LocalStorageSingleton";
 
 const showHideAside = () => {
   const menuBtn = $("button.menu");
@@ -115,7 +116,10 @@ function removeProjectFromDialog(project) {
   //remove project if it is accepted
   warningDialogRemoveButton.addEventListener("click", function () {
     warningDialog.classList.add("hidden");
+    //remove dom
     project.remove();
+    //remove local storage
+    LocalStorage.removeProject(project.getAttribute("data-id"));
   });
 }
 
