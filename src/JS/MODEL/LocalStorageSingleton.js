@@ -42,7 +42,9 @@ const addTodo = (todo) => {
 
 const removeTodo = (todoId) => {
   todoId = idValidation(todoId);
+  todos = getTodos();
   todos = todos.filter((t) => t.id !== todoId);
+  saveTodos();
 };
 
 //Modify todo -> Get and Save at the same index

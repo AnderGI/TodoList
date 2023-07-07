@@ -4,7 +4,7 @@ import {
   handleProjectCreation,
 } from "../CONTROLLER/Controller";
 import { renderAsideFieldContent } from "./UI";
-import { LocalStorage } from "../MODEL/LocalStorageSingleton";
+import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
 
 const showHideAside = () => {
   const menuBtn = $("button.menu");
@@ -81,22 +81,32 @@ const proyectBtnClicked = () => {
   });
 };
 
-function removeProject(element) {
-  const project = element.parentElement.parentElement.parentElement;
+function remove(element) {
+  const target = element.parentElement.parentElement;
   const warningDialog = $("dialog.eliminationWarning");
   const warningDialogRemoveButton = $(
     "dialog.eliminationWarning button.remove"
   );
   //set dialog visible
   warningDialog.classList.remove("hidden");
-  //remove project if it is accepted
-  warningDialogRemoveButton.addEventListener("click", function () {
-    warningDialog.classList.add("hidden");
-    //remove form local storage
-    LocalStorage.removeProject(project.getAttribute("data-id"));
-    //remove from dom
-    project.remove();
-  });
+  if (target.localName === "div" && target.classList.contains("todo")) {
+    warningDialogRemoveButton.addEventListener("click", function () {
+      warningDialog.classList.add("hidden");
+      //remove from dom
+      target.remove();
+      //local storage
+      TodoLocalStorage.removeTodo(target.getAttribute("data-id"));
+    });
+  } else {
+    const project = target.parentElement;
+    warningDialogRemoveButton.addEventListener("click", function () {
+      warningDialog.classList.add("hidden");
+      //remove from dom
+      project.remove();
+      //remove from local storafe
+      LocalStorage.removeProject(project.getAttribute("data-id"));
+    });
+  }
 }
 
 const addTodoBtnClicked = () => {
@@ -125,7 +135,7 @@ function handleProjectDOMClicks(event) {
     target.classList.contains("deleteBtn")
   ) {
     //remove project
-    removeProject(target);
+    remove(target);
   }
 }
 
