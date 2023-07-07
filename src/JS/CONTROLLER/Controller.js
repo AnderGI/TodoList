@@ -80,5 +80,7 @@ export const TodoCreationController = () => {
     todoObj.dueDate = dueDate;
     todoObj.priority = priority;
     TodoLocalStorage.addTodo(todoObj);
+    //close dialog
+    todoForm.parentElement.parentElement.classList.add("hidden");
   }
 };

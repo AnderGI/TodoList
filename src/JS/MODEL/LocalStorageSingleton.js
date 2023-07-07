@@ -31,7 +31,7 @@ const getTodos = () => {
 };
 
 const saveTodos = () => {
-  localStorage.setItem(JSON.stringify(todos));
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 const addTodo = (todo) => {
