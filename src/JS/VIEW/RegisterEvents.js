@@ -4,6 +4,7 @@ import {
   handleProjectCreation,
 } from "../CONTROLLER/Controller";
 import { renderAsideFieldContent } from "./UI";
+import { LocalStorage } from "../MODEL/LocalStorageSingleton";
 
 const showHideAside = () => {
   const menuBtn = $("button.menu");
@@ -77,19 +78,11 @@ const proyectBtnClicked = () => {
   const addProjectBtn = $("dialog.newProject footer button:last-child");
   addProjectBtn.addEventListener("click", function () {
     handleProjectCreation();
-    // expandTodoContainer();
   });
 };
 
-function removeProjectOrTodo(element) {
-  if (element.classList.contains("deleteProject")) {
-    const project = element.parentElement.parentElement.parentElement;
-    removeProjectFromDialog(project);
-  } else if (element.classList.contains("deleteTodo")) {
-  }
-}
-
-function removeProjectFromDialog(project) {
+function removeProject(element) {
+  const project = element.parentElement.parentElement.parentElement;
   const warningDialog = $("dialog.eliminationWarning");
   const warningDialogRemoveButton = $(
     "dialog.eliminationWarning button.remove"
@@ -99,6 +92,9 @@ function removeProjectFromDialog(project) {
   //remove project if it is accepted
   warningDialogRemoveButton.addEventListener("click", function () {
     warningDialog.classList.add("hidden");
+    //remove form local storage
+    LocalStorage.removeProject(project.getAttribute("data-id"));
+    //remove from dom
     project.remove();
   });
 }
@@ -110,17 +106,28 @@ const addTodoBtnClicked = () => {
   );
 };
 
-export const expandTodoContainer = (event) => {
+const expandTodoContainer = (target) => {
+  const todoDOMDiv = target.parentElement.parentElement.parentElement;
+  todoDOMDiv.classList.toggle("expanded");
+  target.classList.toggle("clicked");
+};
+
+function handleProjectDOMClicks(event) {
   const target = event.target;
   if (
     target.localName === "button" &&
     target.classList.contains("expandContent")
   ) {
-    const todoDOMDiv = target.parentElement.parentElement.parentElement;
-    todoDOMDiv.classList.toggle("expanded");
-    target.classList.toggle("clicked");
+    //expand project todo container
+    expandTodoContainer(target);
+  } else if (
+    target.localName === "button" &&
+    target.classList.contains("deleteBtn")
+  ) {
+    //remove project
+    removeProject(target);
   }
-};
+}
 
 export const registerEvents = () => {
   //ASIDE
@@ -137,7 +144,7 @@ export const registerEvents = () => {
   proyectBtnClicked();
 
   //handle clicks on the project container rather than on every element (expand buttons, remove buttons)
-  $("div.projectContainer").addEventListener("click", expandTodoContainer);
+  $("div.projectContainer").addEventListener("click", handleProjectDOMClicks);
 
   //todos
   addTodoBtnClicked();

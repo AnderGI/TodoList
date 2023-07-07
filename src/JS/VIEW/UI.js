@@ -24,7 +24,7 @@ export function renderAside() {
 
 const contentRenderer = {
   all: renderAllTodosField,
-  important: () => console.log("important"),
+  important: renderImportantTodos,
   "next 7 days": () => console.log("next7Days"),
   "next month": () => console.log("nextMonth"),
   projects: renderProjectsField,
@@ -76,4 +76,12 @@ function renderAllTodosField() {
   if (todos.length > 0) {
     todos.forEach((t) => renderDOMTodo(t));
   }
+}
+
+//IMPORTANT FIELD
+function renderImportantTodos() {
+  const todos = TodoLocalStorage.getTodos().filter(
+    (t) => t.priority.toLowerCase() === "high"
+  );
+  todos.forEach((t) => renderDOMTodo(t));
 }
