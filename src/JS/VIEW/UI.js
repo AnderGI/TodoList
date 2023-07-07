@@ -27,7 +27,7 @@ const contentRenderer = {
   all: renderAllTodosField,
   important: renderImportantTodos,
   "next 7 days": renderNextWeekTodos,
-  "next month": () => console.log("nextMonth"),
+  "next month": renderNextMonthTodos,
   projects: renderProjectsField,
 };
 
@@ -67,10 +67,10 @@ function renderProjectsField() {
 }
 
 //ALL FIELD
-const renderDOMTodo = (todoObj) => {
+function renderDOMTodo(todoObj) {
   const DOMTodo = TodoComponent(todoObj);
   divProjectCotainer.append(DOMTodo);
-};
+}
 
 function renderAllTodosField() {
   const todos = TodoLocalStorage.getTodos();
@@ -88,11 +88,20 @@ function renderImportantTodos() {
 }
 
 //NEXT WEEK (7 days or 1 week from todays date)
-function renderNextWeekTodos() {
+function renderNextWeekTodos(number) {
   const today = new Date();
-  const nextWeek = addWeeksFromDate(today, 1);
+  const limit = addWeeksFromDate(today, 1);
   const todos = TodoLocalStorage.getTodos().filter((t) =>
-    isDateBeforeOther(Date.parse(t.dueDate), nextWeek)
+    isDateBeforeOther(Date.parse(t.dueDate), limit)
+  );
+  todos.forEach((t) => renderDOMTodo(t));
+}
+
+function renderNextMonthTodos() {
+  const today = new Date();
+  const limit = addWeeksFromDate(today, 4);
+  const todos = TodoLocalStorage.getTodos().filter((t) =>
+    isDateBeforeOther(Date.parse(t.dueDate), limit)
   );
   todos.forEach((t) => renderDOMTodo(t));
 }
