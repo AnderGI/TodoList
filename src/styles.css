@@ -569,7 +569,7 @@ div.todo .deleteBtn:hover,
   display: none;
 }
 
-.project section.main.expanded {
+.project.expanded section.main {
   display: block;
 }
 

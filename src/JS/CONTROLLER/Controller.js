@@ -3,6 +3,7 @@ import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 import { ProyectFactory } from "../MODEL/ProjectFactory";
 import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
 import { TodoFactory } from "../MODEL/TodoFactory";
+import { renderAsideFieldContent } from "../VIEW/UI";
 
 export function handleProjectCreation() {
   //validar
@@ -30,6 +31,8 @@ function validateProjectCreation() {
   }
   return valid;
 }
+
+//TODO CREATION
 
 function validateTodo(todoForm) {
   let valid = false;
@@ -81,5 +84,7 @@ export const TodoCreationController = () => {
     TodoLocalStorage.addTodo(todoObj);
     //close dialog
     todoForm.parentElement.parentElement.classList.add("hidden");
+    //render the content
+    renderAsideFieldContent();
   }
 };

@@ -77,25 +77,8 @@ const proyectBtnClicked = () => {
   const addProjectBtn = $("dialog.newProject footer button:last-child");
   addProjectBtn.addEventListener("click", function () {
     handleProjectCreation();
-    expandTodoContainer();
+    // expandTodoContainer();
   });
-};
-
-const handleProjectAndTodoContainerClicks = (e) => {
-  const target = e.target;
-  //expand button -> button.expandContent y clase variable clicked
-  if (
-    target.localName === "button" &&
-    target.classList.contains("expandContent")
-  ) {
-    //expand
-    expandTodoContainer();
-  }
-
-  //remove button -> element.deleteBtn
-  if (target.classList.contains("deleteBtn")) {
-    removeProjectOrTodo(target);
-  }
 };
 
 function removeProjectOrTodo(element) {
@@ -127,13 +110,16 @@ const addTodoBtnClicked = () => {
   );
 };
 
-export const expandTodoContainer = () => {
-  const expandTodContainerBtn = $("div.project button.expandContent");
-  expandTodContainerBtn.addEventListener("click", function () {
-    const mainSection = $("div.project section.main");
-    mainSection.classList.toggle("expanded");
-    this.classList.toggle("clicked");
-  });
+export const expandTodoContainer = (event) => {
+  const target = event.target;
+  if (
+    target.localName === "button" &&
+    target.classList.contains("expandContent")
+  ) {
+    const todoDOMDiv = target.parentElement.parentElement.parentElement;
+    todoDOMDiv.classList.toggle("expanded");
+    target.classList.toggle("clicked");
+  }
 };
 
 export const registerEvents = () => {
@@ -151,10 +137,7 @@ export const registerEvents = () => {
   proyectBtnClicked();
 
   //handle clicks on the project container rather than on every element (expand buttons, remove buttons)
-  $("div.projectContainer").addEventListener(
-    "click",
-    handleProjectAndTodoContainerClicks
-  );
+  $("div.projectContainer").addEventListener("click", expandTodoContainer);
 
   //todos
   addTodoBtnClicked();

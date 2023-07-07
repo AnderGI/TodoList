@@ -56,7 +56,6 @@ const renderDOMProjects = (projectObj) => {
   //create html component
   const DOMProject = ProjectComponent(projectObj);
   divProjectCotainer.append(DOMProject);
-  expandTodoContainer();
 };
 
 function renderProjectsField() {
