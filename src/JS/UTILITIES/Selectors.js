@@ -4,4 +4,5 @@ export const $$ = (selector) => document.querySelectorAll(selector);
 export const getDOMTodoFromElement = (element) =>
   element.parentElement.parentElement;
 //button.expandContent || button.deleteContent
-export getDOMProjectFromElement = (element) => element.parentElement.parentElement.parentElement;
+export const getDOMProjectFromElement = (element) =>
+  element.parentElement.parentElement.parentElement;
