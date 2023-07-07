@@ -5,6 +5,7 @@ import { expandTodoContainer } from "./RegisterEvents";
 import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
 import { TodoComponent } from "../COMPONENTS/TodoComponent";
+import { addWeeksFromDate, isDateBeforeOther } from "../UTILITIES/DateFns";
 
 const divProjectCotainer = $("div.projectContainer");
 
@@ -25,7 +26,7 @@ export function renderAside() {
 const contentRenderer = {
   all: renderAllTodosField,
   important: renderImportantTodos,
-  "next 7 days": () => console.log("next7Days"),
+  "next 7 days": renderNextWeekTodos,
   "next month": () => console.log("nextMonth"),
   projects: renderProjectsField,
 };
@@ -82,6 +83,16 @@ function renderAllTodosField() {
 function renderImportantTodos() {
   const todos = TodoLocalStorage.getTodos().filter(
     (t) => t.priority.toLowerCase() === "high"
+  );
+  todos.forEach((t) => renderDOMTodo(t));
+}
+
+//NEXT WEEK (7 days or 1 week from todays date)
+function renderNextWeekTodos() {
+  const today = new Date();
+  const nextWeek = addWeeksFromDate(today, 1);
+  const todos = TodoLocalStorage.getTodos().filter((t) =>
+    isDateBeforeOther(Date.parse(t.dueDate), nextWeek)
   );
   todos.forEach((t) => renderDOMTodo(t));
 }

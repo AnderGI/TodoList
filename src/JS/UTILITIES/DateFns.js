@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, isBefore } from "date-fns";
 import { addWeeks } from "date-fns";
 import { getDaysInMonth } from "date-fns";
 export const timeDistanceFromNow = (date) => {
@@ -15,3 +15,5 @@ export const addWeeksFromDate = (date, numberOfWeeks) =>
   addWeeks(date, numberOfWeeks);
 
 export const getDaysMonth = (date) => getDaysInMonth(date);
+
+export const isDateBeforeOther = (date, dateLimit) => isBefore(date, dateLimit);
