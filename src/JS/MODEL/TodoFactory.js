@@ -50,7 +50,6 @@ const descriptionExtension = () => ({
 const extensionsArray = [
   projectExtension,
   dueDateExtension,
-  projectExtension,
   checkedExtension,
   prioritiesExtension,
   descriptionExtension,
