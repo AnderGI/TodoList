@@ -1,5 +1,8 @@
 import { $, $$ } from "../UTILITIES/Selectors";
-import { handleProjectCreation } from "../CONTROLLER/Controller";
+import {
+  TodoCreationController,
+  handleProjectCreation,
+} from "../CONTROLLER/Controller";
 import { renderAsideFieldElements } from "./UI";
 
 const showHideAside = () => {
@@ -116,6 +119,13 @@ function removeProjectFromDialog(project) {
   });
 }
 
+const addTodoBtnClicked = () => {
+  $("dialog.newTodo footer button:last-child").addEventListener(
+    "click",
+    TodoCreationController
+  );
+};
+
 export const expandTodoContainer = () => {
   const expandTodContainerBtn = $("div.project button.expandContent");
   expandTodContainerBtn.addEventListener("click", function () {
@@ -144,4 +154,7 @@ export const registerEvents = () => {
     "click",
     handleProjectAndTodoContainerClicks
   );
+
+  //todos
+  addTodoBtnClicked();
 };

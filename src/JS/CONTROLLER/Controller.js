@@ -1,7 +1,7 @@
 import { $, $$ } from "../UTILITIES/Selectors";
 import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
 import { ProyectFactory } from "../MODEL/ProjectFactory";
-import { LocalStorage } from "../MODEL/LocalStorageSingleton";
+import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
 import { DOMRenderer } from "../VIEW/DOMRenderer";
 import { TodoFactory } from "../MODEL/TodoFactory";
 
@@ -32,14 +32,14 @@ function validateProjectCreation() {
   return valid;
 }
 
-function validateTodo() {
-  const todoForm = $("dialog.newTodo form");
+function validateTodo(todoForm) {
   let valid = false;
   if (
     todoForm.elements.todoTitle.value === "" ||
     todoForm.elements.todoTitle.value.toLowerCase() ===
       "the field must not be empty"
   ) {
+    //todo title
     todoForm.elements.todoTitle.focus();
     todoForm.elements.todoTitle.value = "This field is required";
   } else if (
@@ -47,9 +47,11 @@ function validateTodo() {
     todoForm.elements.todoDescription.value.toLowerCase() ===
       "this field is required"
   ) {
+    //todo description
     todoForm.elements.todoDescription.focus();
     todoForm.elements.todoDescription.value = "This field is required";
   } else if (todoForm.elements.dueDate.value === "") {
+    //todo date
     todoForm.elements.dueDate.focus();
   } else {
     valid = true;
@@ -58,17 +60,25 @@ function validateTodo() {
   return valid;
 }
 
-const createTodo = () => {
-  const todoForm = $("dialog.newTodo form");
-  const todo = TodoFactory(todoForm.elements.todoTitle.value);
+const getTodoFormData = (todoForm) => {
+  return Object.assign(
+    {},
+    { title: todoForm.elements.todoTitle.value },
+    { dueDate: todoForm.elements.dueDate.value },
+    { priority: todoForm.elements.priority.value },
+    { description: todoForm.elements.todoDescription.value }
+  );
 };
 
 export const TodoCreationController = () => {
+  const todoForm = $(`dialog.newTodo form`);
   //validar todo y si es valido crealo
-  if (validateTodo()) {
-    //createTodo();
+  if (validateTodo(todoForm)) {
+    const { title, dueDate, priority, description } = getTodoFormData(todoForm);
+    const todoObj = TodoFactory(title);
+    todoObj.description = description;
+    todoObj.dueDate = dueDate;
+    todoObj.priority = priority;
+    TodoLocalStorage.addTodo(todoObj);
   }
-
-  //guardarlo en el localstorage´
-  //añadirlo al dom y renderizarlo
 };

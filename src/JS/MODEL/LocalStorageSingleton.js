@@ -83,4 +83,4 @@ const TodoLocalStorage = {
   saveTodo,
 };
 
-export { LocalStorage };
+export { LocalStorage, TodoLocalStorage };

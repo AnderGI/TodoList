@@ -48,9 +48,7 @@ const descriptionExtension = () => ({
 });
 
 const extensionsArray = [
-  projectExtension,
   dueDateExtension,
-  checkedExtension,
   prioritiesExtension,
   descriptionExtension,
 ];
