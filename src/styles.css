@@ -656,6 +656,7 @@ div.todo input[type="checkbox"]:checked + span.todoTitle,
 .project section.main input[type="checkbox"]:checked + span.todoTitle {
   -webkit-animation: wiggle 0.4s ease;
   animation: wiggle 0.4s ease;
+  text-decoration: line-through;
 }
 
 div.todo input[type="checkbox"]:hover,

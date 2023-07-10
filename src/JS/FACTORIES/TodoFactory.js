@@ -52,6 +52,7 @@ const extensionsArray = [
   dueDateExtension,
   prioritiesExtension,
   descriptionExtension,
+  checkedExtension,
 ];
 
 const todoExtensions = (extensions) => {

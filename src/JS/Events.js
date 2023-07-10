@@ -79,6 +79,17 @@ export function handleDialogEvents(event) {
     renderActiveLiContent(
       [...$$("aside ul li")].filter((el) => el.classList.contains("active"))[0]
     );
+  } else if (event.target.matches("button.deleteBtn.deleteTodo")) {
+    const todoDiv = getTodoDivFromBtn(event.target);
+    const id = todoDiv.getAttribute("data-id");
+    console.log(id);
+    /*
+    todoDiv.remove();
+    TodoLocalStorage.removeTodo(id);
+    renderActiveLiContent(
+      [...$$("aside ul li")].filter((el) => el.classList.contains("active"))[0]
+    );
+    */
   }
 }
 
@@ -116,7 +127,6 @@ export function projectContainerEventsHandler() {
       const id = getTodoDivFromBtn(event.target).getAttribute("data-id");
       //get todo
       const todo = TodoLocalStorage.getTodo(id);
-      console.log(todo);
       //show dialog
       displayDialog(
         TodoDialogComponent({
@@ -129,6 +139,22 @@ export function projectContainerEventsHandler() {
           lastButtonText: "Edit Todo",
         })
       );
+    } else if (event.target.matches("button.deleteBtn.deleteTodo")) {
+      const todoDiv = getTodoDivFromBtn(event.target);
+      const id = todoDiv.getAttribute("data-id");
+      todoDiv.remove();
+      TodoLocalStorage.removeTodo(id);
+      renderActiveLiContent(
+        [...$$("aside ul li")].filter((el) =>
+          el.classList.contains("active")
+        )[0]
+      );
+    } else if (event.target.matches("input#todoChecked")) {
+      const todoDiv = getTodoDivFromBtn(event.target);
+      const id = todoDiv.getAttribute("data-id");
+      const todo = TodoLocalStorage.getTodo(id);
+      todo.checked = !todo.checked;
+      TodoLocalStorage.saveTodo(todo);
     }
   });
 }

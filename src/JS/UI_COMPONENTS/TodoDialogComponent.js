@@ -46,8 +46,7 @@ export function TodoDialogComponent({
             id="todoDescription"
             cols="30"
             rows="10"
-            >${descriptionValue}
-            </textarea>
+            >${descriptionValue}</textarea>
         </section>
       </form>
     </main>
