@@ -51,14 +51,11 @@ body > nav button {
   align-items: center;
 }
 
-body > nav button:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.75);
-  transform: scale(1.5);
-}
-
+body > nav button:hover,
 body > nav button:hover div {
-  background-color: var(--navBackground);
+  cursor: pointer;
+
+  transform: scale(1.5);
 }
 
 body > nav button > div {
@@ -175,6 +172,7 @@ aside ul li span {
   align-items: center;
   gap: 1em;
   position: relative;
+  pointer-events: none;
 }
 
 aside svg {
@@ -370,12 +368,14 @@ dialog.newProject label {
   display: block;
 }
 
-dialog.newTodo {
+dialog.newTodo,
+dialog.editTodo {
   width: 50vw;
   height: 70vh;
 }
 
-dialog.newTodo > main form {
+dialog.newTodo > main form,
+dialog.editTodo > main form {
   width: 100%;
   height: 100%;
   display: grid;
@@ -385,64 +385,76 @@ dialog.newTodo > main form {
 }
 
 dialog.newTodo form section:nth-child(1),
-dialog.newTodo form section:nth-child(2) {
+dialog.newTodo form section:nth-child(2),
+dialog.editTodo form section:nth-child(1),
+dialog.editTodo form section:nth-child(2) {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1;
 }
 
-dialog.newTodo form section:nth-child(2) {
+dialog.newTodo form section:nth-child(2),
+dialog.editTodo form section:nth-child(2) {
   column-gap: 2em;
 }
 
-dialog.newTodo form section label {
+dialog.newTodo form section label,
+dialog.editTodo form section label {
   display: flex;
   align-items: center;
 }
 
-dialog.newTodo form section:nth-child(1) label {
+dialog.newTodo form section:nth-child(1) label,
+dialog.editTodo form section:nth-child(1) label {
   grid-column-start: 1;
   grid-column-end: 2;
 }
 
-dialog.newTodo form section:nth-child(1) input {
+dialog.newTodo form section:nth-child(1) input,
+dialog.editTodo form section:nth-child(1) input {
   grid-column-start: 2;
   grid-column-end: 7;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
 }
 
-dialog.newTodo form section:nth-child(2) label:first-of-type {
+dialog.newTodo form section:nth-child(2) label:first-of-type,
+dialog.editTodo form section:nth-child(2) label:first-of-type {
   grid-column-start: 1;
   grid-column-end: 2;
 }
 
-dialog.newTodo form section:nth-child(2) input {
+dialog.newTodo form section:nth-child(2) input,
+dialog.editTodo form section:nth-child(2) input {
   grid-column-start: 2;
   grid-column-end: 4;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
 }
 
-dialog.newTodo form section:nth-child(2) label:last-of-type {
+dialog.newTodo form section:nth-child(2) label:last-of-type,
+dialog.editTodo form section:nth-child(2) label:last-of-type {
   grid-column-start: 4;
   grid-column-end: 5;
 }
 
-dialog.newTodo form section:nth-child(2) select {
+dialog.newTodo form section:nth-child(2) select,
+dialog.editTodo form section:nth-child(2) select {
   grid-column-start: 5;
   grid-column-end: 7;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
 }
 
-dialog.newTodo form section:nth-child(3) {
+dialog.newTodo form section:nth-child(3),
+dialog.editTodo form section:nth-child(3) {
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: 1;
 }
 
-dialog.newTodo form section:nth-child(3) textarea {
+dialog.newTodo form section:nth-child(3) textarea,
+dialog.editTodo form section:nth-child(3) textarea {
   resize: none;
   padding: 0.5em 1em;
   letter-spacing: 0.1em;
@@ -513,6 +525,7 @@ dialog.eliminationWarning h6 {
   gap: 1em;
 }
 
+div.todo .deleteBtn,
 .project .deleteBtn {
   height: 1.5em;
   width: 1.5em;
@@ -535,6 +548,7 @@ dialog.eliminationWarning h6 {
   );
 }
 
+div.todo .deleteBtn:hover,
 .project .deleteBtn:hover,
 .project .expandContent:hover {
   transform: scale(1.5) rotate(45deg);
@@ -570,17 +584,20 @@ dialog.eliminationWarning h6 {
   display: none;
 }
 
-.project section.main.expanded {
+.project.expanded section.main {
   display: block;
 }
 
+div.todo,
 .project section.main div.todo {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 0.5em 3em;
 }
 
+div.todo > div,
 .project section.main div.todo > div {
   display: flex;
   flex-direction: row;
@@ -589,10 +606,12 @@ dialog.eliminationWarning h6 {
   gap: 1em;
 }
 
+div.todo > div:last-child,
 .project section.main div.todo > div:last-child {
   gap: 2em;
 }
 
+div.todo > div:last-child div.showMore,
 .project section.main div.todo > div:last-child div.showMore {
   display: grid;
   grid-template-rows: 1;
@@ -600,42 +619,52 @@ dialog.eliminationWarning h6 {
   column-gap: 0.25em;
 }
 
+div.todo > div:last-child div.showMore:hover,
 .project section.main div.todo > div:last-child div.showMore:hover {
   cursor: pointer;
   transform: scale(1.5);
 }
 
+div.todo > div:last-child div.showMore:hover div,
 .project section.main div.todo > div:last-child div.showMore:hover div {
   background-color: var(--navBackground);
 }
 
+div.todo > div:last-child div.showMore div,
 .project section.main div.todo > div:last-child div.showMore div {
   border-radius: 50%;
   background-color: black;
   width: 0.5em;
   height: 0.5em;
+  pointer-events: none;
 }
 
+div.todo input[type="checkbox"],
 .project section.main input[type="checkbox"] {
   width: 2em;
   height: 2em;
   accent-color: var(--navBackground);
 }
 
+div.todo input[type="checkbox"]:checked,
 .project section.main input[type="checkbox"]:checked {
   -webkit-animation: wiggle 0.4s ease;
   animation: wiggle 0.4s ease;
 }
 
+div.todo input[type="checkbox"]:checked + span.todoTitle,
 .project section.main input[type="checkbox"]:checked + span.todoTitle {
   -webkit-animation: wiggle 0.4s ease;
   animation: wiggle 0.4s ease;
+  text-decoration: line-through;
 }
 
+div.todo input[type="checkbox"]:hover,
 .project section.main input[type="checkbox"]:hover {
   cursor: pointer;
 }
 
+div.todo span.todoTitle,
 .project section.main span.todoTitle {
   font-size: 1rem;
   letter-spacing: 0.1em;

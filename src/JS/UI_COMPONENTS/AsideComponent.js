@@ -1,5 +1,6 @@
-export function TodoListField(component) {
+export function AsideComponent(component) {
   const span = document.createElement("span");
+  let active = false;
   span.innerHTML = component.image;
   span.innerHTML += component.name;
   if (component?.otherComponents) {
@@ -7,5 +8,8 @@ export function TodoListField(component) {
       span.append(component);
     }
   }
-  return span;
+  if (component?.active) {
+    active = true;
+  }
+  return { span, active };
 }

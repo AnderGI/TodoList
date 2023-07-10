@@ -1,5 +1,3 @@
-import { DialogDisplayerButton } from "../COMPONENTS/DialogDisplayerButton";
-
 const ALL_SVG = `<svg
 fill="#000000"
 viewBox="0 0 32 32"
@@ -23,6 +21,7 @@ xmlns="http://www.w3.org/2000/svg"
 const allField = {
   image: ALL_SVG,
   name: "All",
+  active: true,
 };
 
 const IMPORTANT_SVG = `<svg
@@ -159,53 +158,11 @@ const nextMonthField = {
   name: "Next Month",
 };
 
-const PROJECTS_SVG = `<svg
-viewBox="0 0 512 512"
-version="1.1"
-xmlns="http://www.w3.org/2000/svg"
-xmlns:xlink="http://www.w3.org/1999/xlink"
-fill="#000000"
->
-<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-<g
-  id="SVGRepo_tracerCarrier"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-></g>
-<g id="SVGRepo_iconCarrier">
-  <title>tasks-all</title>
-  <g
-    id="Page-1"
-    stroke="none"
-    stroke-width="1"
-    fill="none"
-    fill-rule="evenodd"
-  >
-    <g
-      id="Combined-Shape"
-      fill="#000000"
-      transform="translate(70.530593, 46.125620)"
-    >
-      <path
-        d="M185.469407,39.207713 L356.136074,39.207713 L356.136074,81.8743797 L185.469407,81.8743797 L185.469407,39.207713 Z M185.469407,188.541046 L356.136074,188.541046 L356.136074,231.207713 L185.469407,231.207713 L185.469407,188.541046 Z M185.469407,337.87438 L356.136074,337.87438 L356.136074,380.541046 L185.469407,380.541046 L185.469407,337.87438 Z M119.285384,-7.10542736e-15 L144.649352,19.5107443 L68.6167605,118.353113 L2.84217094e-14,58.3134476 L21.0721475,34.2309934 L64.0400737,71.8050464 L119.285384,-7.10542736e-15 Z M119.285384,149.333333 L144.649352,168.844078 L68.6167605,267.686446 L2.84217094e-14,207.646781 L21.0721475,183.564327 L64.0400737,221.13838 L119.285384,149.333333 Z M119.285384,298.666667 L144.649352,318.177411 L68.6167605,417.01978 L2.84217094e-14,356.980114 L21.0721475,332.89766 L64.0400737,370.471713 L119.285384,298.666667 Z"
-      ></path>
-    </g>
-  </g>
-</g>
-</svg>`;
-
-const projectsField = {
-  image: PROJECTS_SVG,
-  name: "Projects",
-  otherComponents: [DialogDisplayerButton(["newProject"])],
-};
-
 const todoListFields = [
   allField,
   importantField,
   next7DaysField,
   nextMonthField,
-  projectsField,
 ];
 
 export function getTodoListFields() {

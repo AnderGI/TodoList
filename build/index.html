@@ -3,27 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TicTacToe</title>
+    <title>TodoList App</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://em-content.zobj.net/thumbs/160/microsoft/319/notebook_1f4d3.png"
+    />
   <script defer src="build.js"></script></head>
   <body>
-    <aside>
-      <h3>Projects</h3>
-      <div class="projectContainer"></div>
-      <button>Add Project</button>
-    </aside>
-    <main id="mainContainer">
-      <header>
-        <h1>TodoList Application</h1>
-        <nav>
-          <ul>
-            <li><a href="#">All</a></li>
-            <li><a href="#">Important</a></li>
-            <li><a href="#">Next 7 days</a></li>
-            <li><a href="#">This month</a></li>
-          </ul>
-        </nav>
-      </header>
-      <main></main>
+    <nav>
+      <h1>TodoList App</h1>
+      <span>
+        <button class="dialogDisplayer newTodo">
+          <div></div>
+        </button>
+      </span>
+    </nav>
+    <main class="asideOpen">
+      <aside></aside>
+      <section>
+        <h1></h1>
+        <div class="projectContainer"></div>
+      </section>
     </main>
   </body>
 </html>
