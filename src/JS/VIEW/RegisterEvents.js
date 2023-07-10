@@ -1,21 +1,15 @@
-import { $, $$ } from "../UTILITIES/Selectors";
 import {
-  TodoCreationController,
-  handleProjectCreation,
-} from "../CONTROLLER/Controller";
-import { renderAsideFieldElements } from "./UI";
-import { LocalStorage } from "../MODEL/LocalStorageSingleton";
 
-const showHideAside = () => {
-  const menuBtn = $("button.menu");
-  const aside = $("body > main > aside");
-  menuBtn.addEventListener("click", () => {
-    aside.classList.toggle("hidden");
-    aside.classList.contains("hidden")
-      ? $("body > main").classList.remove("asideOpen") || ""
-      : $("body > main").classList.add("asideOpen");
-  });
-};
+  $,
+  $$,
+  getDOMTodoFromElement,
+  getDialogFromBtn,
+} from "../UTILITIES/Selectors";
+import { TodoCreationController } from "../CONTROLLER/Controller";
+import { renderAsideFieldContent } from "./UI";
+import { LocalStorage, TodoLocalStorage } from "../STORAGE/LocalStorage";
+import { set } from "date-fns";
+
 
 const displayDailog = () => {
   //the dialog displayer button has that class and another one to differentiate dialogs
@@ -69,59 +63,9 @@ const asideElementsClick = () => {
       activeElements.forEach((el) => el.classList.remove("active"));
     }
     this.classList.add("active");
-    renderAsideFieldElements(this);
+    renderAsideFieldContent();
   }
 };
-
-const proyectBtnClicked = () => {
-  const addProjectBtn = $("dialog.newProject footer button:last-child");
-  addProjectBtn.addEventListener("click", function () {
-    handleProjectCreation();
-    expandTodoContainer();
-  });
-};
-
-const handleProjectAndTodoContainerClicks = (e) => {
-  const target = e.target;
-  //expand button -> button.expandContent y clase variable clicked
-  if (
-    target.localName === "button" &&
-    target.classList.contains("expandContent")
-  ) {
-    //expand
-    expandProjectOrTodo();
-  }
-
-  //remove button -> element.deleteBtn
-  if (target.classList.contains("deleteBtn")) {
-    removeProjectOrTodo(target);
-  }
-};
-
-function removeProjectOrTodo(element) {
-  if (element.classList.contains("deleteProject")) {
-    const project = element.parentElement.parentElement.parentElement;
-    removeProjectFromDialog(project);
-  } else if (element.classList.contains("deleteTodo")) {
-  }
-}
-
-function removeProjectFromDialog(project) {
-  const warningDialog = $("dialog.eliminationWarning");
-  const warningDialogRemoveButton = $(
-    "dialog.eliminationWarning button.remove"
-  );
-  //set dialog visible
-  warningDialog.classList.remove("hidden");
-  //remove project if it is accepted
-  warningDialogRemoveButton.addEventListener("click", function () {
-    warningDialog.classList.add("hidden");
-    //remove dom
-    project.remove();
-    //remove local storage
-    LocalStorage.removeProject(project.getAttribute("data-id"));
-  });
-}
 
 const addTodoBtnClicked = () => {
   $("dialog.newTodo footer button:last-child").addEventListener(
@@ -130,19 +74,41 @@ const addTodoBtnClicked = () => {
   );
 };
 
-export const expandTodoContainer = () => {
-  const expandTodContainerBtn = $("div.project button.expandContent");
-  expandTodContainerBtn.addEventListener("click", function () {
-    const mainSection = $("div.project section.main");
-    mainSection.classList.toggle("expanded");
-    this.classList.toggle("clicked");
-  });
-};
+function handleProjectDOMClicks(event) {
+  const target = event.target;
+  if (target.matches("button.deleteBtn")) {
+    //remove project
+    remove();
+  }
+}
+
+function remove() {
+  //set dialog visible
+  setWarningDialogVisible();
+}
+
+function setWarningDialogVisible() {
+  const warningDialog = $("dialog.eliminationWarning");
+  //set dialog visible
+  warningDialog.classList.remove("hidden");
+  //event delegation
+  warningDialog.addEventListener("click", warningDialogEventDelegation);
+
+
+}
+
+function warningDialogEventDelegation(event) {
+  if (event.target.matches("dialog.eliminationWarning button.remove")) {
+    //close dialog
+    //UI
+    //remove todo from dom
+    //controlle remove todo from localstorage
+  }
+
+  //x and close to close
+}
 
 export const registerEvents = () => {
-  //ASIDE
-  showHideAside();
-
   //close any dialog
   closeDialog();
 
@@ -151,13 +117,8 @@ export const registerEvents = () => {
 
   asideElementsClick();
 
-  proyectBtnClicked();
-
   //handle clicks on the project container rather than on every element (expand buttons, remove buttons)
-  $("div.projectContainer").addEventListener(
-    "click",
-    handleProjectAndTodoContainerClicks
-  );
+  $("div.projectContainer").addEventListener("click", handleProjectDOMClicks);
 
   //todos
   addTodoBtnClicked();

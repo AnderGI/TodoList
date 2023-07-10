@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 //FUNCTIONS ARE COMMENTED SINCE THEY CANNOT BE STORED IN LOCAL STORAGE
 
 const projectExtension = () => ({
@@ -51,6 +52,7 @@ const extensionsArray = [
   dueDateExtension,
   prioritiesExtension,
   descriptionExtension,
+  checkedExtension,
 ];
 
 const todoExtensions = (extensions) => {
@@ -64,7 +66,7 @@ const todoExtensions = (extensions) => {
 export const TodoFactory = (title) => {
   const basicData = {
     title,
-    id: Date.now(),
+    id: uuidv4(),
     /*
     getId: function () {
       return this.id;
