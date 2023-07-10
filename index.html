@@ -3,27 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TicTacToe</title>
+    <title>TodoList App</title>
   <script defer src="build.js"></script></head>
   <body>
-    <aside>
-      <h3>Projects</h3>
-      <div class="projectContainer"></div>
-      <button>Add Project</button>
-    </aside>
-    <main id="mainContainer">
+    <dialog class="eliminationWarning hidden">
       <header>
-        <h1>TodoList Application</h1>
-        <nav>
-          <ul>
-            <li><a href="#">All</a></li>
-            <li><a href="#">Important</a></li>
-            <li><a href="#">Next 7 days</a></li>
-            <li><a href="#">This month</a></li>
-          </ul>
-        </nav>
+        <h6>WARNING!!!!</h6>
+        <span class="closeDialog eliminationWarning"></span>
       </header>
-      <main></main>
+      <main>
+        <p>
+          This action will cause to lose
+          <strong><big>permanently all</big></strong> all the information
+          contained within (todos included). Do you want to go-ahead?
+        </p>
+      </main>
+      <footer>
+        <button class="closeDialog eliminationWarning">Close</button>
+        <button class="remove">Remove All</button>
+      </footer>
+    </dialog>
+    <dialog class="editTodo hidden">
+      <header>
+        <h6>Edit Todo</h6>
+        <span class="closeDialog editTodo"></span>
+      </header>
+      <main>
+        <form action="#">
+          <section>
+            <label for="todoTitle">Title : </label>
+            <input type="text" name="todoTitle" id="todoTitle" />
+          </section>
+          <section>
+            <label for="dueDate">Due Date : </label>
+            <input type="datetime-local" name="dueDate" id="dueDate" />
+            <label for="priority">Priority : </label>
+            <select name="priority" id="priority">
+              <option value="high">High &#128561;</option>
+              <option value="medium">Medium &#128550;</option>
+              <option value="low" selected>Low &#128554;</option>
+            </select>
+          </section>
+          <section>
+            <label for="todoDescription">Description : </label>
+            <br / >
+            <textarea
+              name="todoDescription"
+              id="todoDescription"
+              cols="30"
+              rows="10"
+            ></textarea>
+          </section>
+        </form>
+      </main>
+      <footer>
+        <button class="closeDialog editTodo">Close</button>
+        <button class="editTodoBtn">Edit Todo</button>
+      </footer>
+    </dialog>
+    <dialog class="newTodo hidden">
+      <header>
+        <h6>New Todo</h6>
+        <span class="closeDialog newTodo"></span>
+      </header>
+      <main>
+        <form action="#">
+          <section>
+            <label for="todoTitle">Title : </label>
+            <input type="text" name="todoTitle" id="todoTitle" />
+          </section>
+          <section>
+            <label for="dueDate">Due Date : </label>
+            <input type="datetime-local" name="dueDate" id="dueDate" />
+            <label for="priority">Priority : </label>
+            <select name="priority" id="priority">
+              <option value="high">High &#128561;</option>
+              <option value="medium">Medium &#128550;</option>
+              <option value="low" selected>Low &#128554;</option>
+            </select>
+          </section>
+          <section>
+            <label for="todoDescription">Description : </label>
+            <br / >
+            <textarea
+              name="todoDescription"
+              id="todoDescription"
+              cols="30"
+              rows="10"
+            ></textarea>
+          </section>
+        </form>
+      </main>
+      <footer>
+        <button class="closeDialog newTodo">Close</button>
+        <button>Add Todo</button>
+      </footer>
+    </dialog>
+    <dialog class="newProject hidden">
+      <header>
+        <h6>New project</h6>
+        <span class="closeDialog newProject"></span>
+      </header>
+      <main>
+        <label for="name">Name : </label>
+        <input type="text" id="name" maxlength="40" />
+      </main>
+      <footer>
+        <button class="closeDialog newProject">Close</button>
+        <button>Add Project</button>
+      </footer>
+    </dialog>
+    <nav>
+      <span>
+        <button class="menu">
+          <div></div>
+        </button>
+        <button class="today">
+          <div></div>
+        </button>
+      </span>
+      <h1>TodoList App</h1>
+      <span>
+        <button class="dialogDisplayer newTodo">
+          <div></div>
+        </button>
+      </span>
+    </nav>
+    <main class="asideOpen">
+      <aside></aside>
+      <section>
+        <h1></h1>
+        <div class="projectContainer"></div>
+      </section>
     </main>
   </body>
 </html>
