@@ -23,10 +23,10 @@
         <button class="remove">Remove All</button>
       </footer>
     </dialog>
-    <dialog class="newTodo hidden">
+    <dialog class="editTodo hidden">
       <header>
-        <h6>New Todo</h6>
-        <span class="closeDialog newTodo"></span>
+        <h6>Edit Todo</h6>
+        <span class="closeDialog editTodo"></span>
       </header>
       <main>
         <form action="#">
@@ -57,33 +57,11 @@
         </form>
       </main>
       <footer>
-        <button class="closeDialog newTodo">Close</button>
-        <button>Add Todo</button>
-      </footer>
-    </dialog>
-    <dialog class="newProject hidden">
-      <header>
-        <h6>New project</h6>
-        <span class="closeDialog newProject"></span>
-      </header>
-      <main>
-        <label for="name">Name : </label>
-        <input type="text" id="name" maxlength="40" />
-      </main>
-      <footer>
-        <button class="closeDialog newProject">Close</button>
-        <button>Add Project</button>
+        <button class="closeDialog editTodo">Close</button>
+        <button class="editTodoBtn">Edit Todo</button>
       </footer>
     </dialog>
     <nav>
-      <span>
-        <button class="menu">
-          <div></div>
-        </button>
-        <button class="today">
-          <div></div>
-        </button>
-      </span>
       <h1>TodoList App</h1>
       <span>
         <button class="dialogDisplayer newTodo">

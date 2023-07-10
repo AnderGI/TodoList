@@ -33,6 +33,7 @@ module.exports = (env, argv) => {
       rules: [rulesForCss, rulesForJs, rulesForSVG],
     },
     plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+    devtool: isProduction ? "" : "inline-source-map",
     devServer: {
       open: true,
       port: 3000,

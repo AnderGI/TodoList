@@ -4,5 +4,6 @@ export const $$ = (selector) => document.querySelectorAll(selector);
 export const getDOMTodoFromElement = (element) =>
   element.parentElement.parentElement;
 //button.expandContent || button.deleteContent
-export const getDOMProjectFromElement = (element) =>
-  element.parentElement.parentElement.parentElement;
+//dialog will have hader main footer > buttons
+export const getDialogFromChild = (child) => child.parentElement.parentElement;
+export const getTodoDivFromBtn = (btn) => btn.parentElement.parentElement;

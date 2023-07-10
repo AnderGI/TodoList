@@ -1,49 +1,45 @@
-import { TodoListField } from "../COMPONENTS/TodoListFieldComponent";
-import { getTodoListFields } from "../MODEL/TodoListSingleton";
-import { $, $$ } from "../UTILITIES/Selectors";
-import { expandTodoContainer } from "./RegisterEvents";
-import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
-import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
-import { TodoComponent } from "../COMPONENTS/TodoComponent";
-import { addWeeksFromDate, isDateBeforeOther } from "../UTILITIES/DateFns";
+import { asideElementsClick, handleDialogEvents } from "./Events";
+import { TodoLocalStorage } from "./STORAGE/LocalStorage";
+import { AsideComponent } from "./UI_COMPONENTS/AsideComponent";
+import { getTodoListFields } from "./UI_COMPONENTS/AsideComponentsArray";
+import { TodoComponent } from "./UI_COMPONENTS/TodoComponent";
+import { TodoDialogComponent } from "./UI_COMPONENTS/TodoDialogComponent";
+import { addWeeksFromDate, isDateBeforeOther } from "./UTILITIES/DateFns";
+import { $, $$ } from "./UTILITIES/Selectors";
 
 const divProjectCotainer = $("div.projectContainer");
+const asideFieldComponents = getTodoListFields(); //retreive fields with name, svg an other components (optional)
+//const addTodoDialog = $("dialog.newTodo");
 
+//RENDER ASIDE
 export function renderAside() {
   const aside = $("body > main > aside");
   const ul = document.createElement("ul");
-  const fields = getTodoListFields(); //retreive fields with name, svg an other components (optional)
-  for (const field of fields) {
+  for (const field of asideFieldComponents) {
     const li = document.createElement("li");
-    const { span: component, active } = TodoListField(field); // create fields with name, svg an other components (optional)
+    const { span: component, active } = AsideComponent(field); // create fields with name, svg an other components (optional)
     li.append(component);
-    if (active) li.classList.add("active");
+    if (active) {
+      li.classList.add("active");
+      renderActiveLiContent(li);
+    }
     ul.append(li);
   }
+
+  ul.addEventListener("click", asideElementsClick);
   aside.append(ul);
 }
 
+//RENDER MAIN CONTENT SECTION TAKING INTO ACCOUNT THE ACTIVE LI ELEMENT
 const contentRenderer = {
   all: renderAllTodosField,
   important: renderImportantTodos,
   "next 7 days": renderNextWeekTodos,
   "next month": renderNextMonthTodos,
-  projects: renderProjectsField,
 };
 
-export function renderAsideFieldContent() {
+export function renderActiveLiContent(activeElement) {
   divProjectCotainer.replaceChildren();
-  //set content
-  renderActiveAsideFieldContent();
-}
-
-function renderActiveAsideFieldContent() {
-  //get the list
-  const asideElements = [...$$("aside > ul > li")];
-  //get the active element from it
-  const activeElement = asideElements.filter((el) =>
-    el.classList.contains("active")
-  )[0];
   //set the data from the active element
   const titleEl = $("body > main > section > h1");
   const asideFieldText = activeElement.firstChild.childNodes[1].textContent;
@@ -52,21 +48,6 @@ function renderActiveAsideFieldContent() {
   contentRenderer[titleEl.textContent.toLowerCase()]();
 }
 
-//PROJECT DOM RENDERING
-const renderDOMProjects = (projectObj) => {
-  //create html component
-  const DOMProject = ProjectComponent(projectObj);
-  divProjectCotainer.append(DOMProject);
-};
-
-function renderProjectsField() {
-  const projects = LocalStorage.getProjects();
-  if (projects.length > 0) {
-    projects.forEach((p) => renderDOMProjects(p));
-  }
-}
-
-//ALL FIELD
 function renderDOMTodo(todoObj) {
   const DOMTodo = TodoComponent(todoObj);
   divProjectCotainer.append(DOMTodo);
@@ -88,7 +69,7 @@ function renderImportantTodos() {
 }
 
 //NEXT WEEK (7 days or 1 week from todays date)
-function renderNextWeekTodos(number) {
+function renderNextWeekTodos() {
   const today = new Date();
   const limit = addWeeksFromDate(today, 1);
   const todos = TodoLocalStorage.getTodos().filter((t) =>
@@ -104,4 +85,16 @@ function renderNextMonthTodos() {
     isDateBeforeOther(Date.parse(t.dueDate), limit)
   );
   todos.forEach((t) => renderDOMTodo(t));
+}
+
+//ADD TODO DIALOG
+export function displayDialog(dialog) {
+  $("body").append(dialog);
+  dialog.classList.remove("hidden");
+  dialog.addEventListener("click", handleDialogEvents);
+}
+
+export function hideDialog(dialog) {
+  dialog.classList.add("hidden");
+  $("body").removeChild(dialog);
 }

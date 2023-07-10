@@ -1,39 +1,8 @@
 import { $, $$ } from "../UTILITIES/Selectors";
-import { ProjectComponent } from "../COMPONENTS/ProjectComponent";
-import { ProyectFactory } from "../MODEL/ProjectFactory";
-import { LocalStorage, TodoLocalStorage } from "../MODEL/LocalStorageSingleton";
-import { TodoFactory } from "../MODEL/TodoFactory";
-import { renderAsideFieldContent } from "../VIEW/UI";
-
-export function handleProjectCreation() {
-  //validar
-  if (validateProjectCreation()) {
-    $("dialog.newProject").classList.add("hidden");
-    const project = ProyectFactory($("dialog.newProject #name").value);
-    $("div.projectContainer").append(ProjectComponent(project));
-    LocalStorage.addProject(project);
-  }
-  //crear, renderizar, guardar en local storage
-}
-
-function validateProjectCreation() {
-  const input = $("dialog.newProject #name");
-  let valid = false;
-  if (input.value === "") {
-    input.focus();
-    input.value = "the field must not be empty";
-    input.classList.add("invalid");
-    input.addEventListener("input", function () {
-      this.classList.remove("invalid");
-    });
-  } else {
-    valid = true;
-  }
-  return valid;
-}
+import { LocalStorage, TodoLocalStorage } from "../STORAGE/LocalStorage";
+import { TodoFactory } from "../FACTORIES/TodoFactory";
 
 //TODO CREATION
-
 function validateTodo(todoForm) {
   let valid = false;
   if (
@@ -62,16 +31,6 @@ function validateTodo(todoForm) {
   return valid;
 }
 
-const getTodoFormData = (todoForm) => {
-  return Object.assign(
-    {},
-    { title: todoForm.elements.todoTitle.value },
-    { dueDate: todoForm.elements.dueDate.value },
-    { priority: todoForm.elements.priority.value },
-    { description: todoForm.elements.todoDescription.value }
-  );
-};
-
 export const TodoCreationController = () => {
   const todoForm = $(`dialog.newTodo form`);
   //validar todo y si es valido crealo
@@ -88,3 +47,22 @@ export const TodoCreationController = () => {
     renderAsideFieldContent();
   }
 };
+
+export function todoCreationFromForm(form) {
+  const { title, dueDate, priority, description } = getTodoFormData(form);
+  const todoObj = TodoFactory(title);
+  todoObj.dueDate = dueDate;
+  todoObj.priority = priority;
+  todoObj.description = description;
+  return todoObj;
+}
+
+export function getTodoFormData(todoForm) {
+  return Object.assign(
+    {},
+    { title: todoForm.elements.todoTitle.value },
+    { dueDate: todoForm.elements.dueDate.value },
+    { priority: todoForm.elements.priority.value },
+    { description: todoForm.elements.todoDescription.value }
+  );
+}

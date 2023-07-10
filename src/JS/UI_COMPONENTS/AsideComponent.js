@@ -1,4 +1,4 @@
-export function TodoListField(component) {
+export function AsideComponent(component) {
   const span = document.createElement("span");
   let active = false;
   span.innerHTML = component.image;
