@@ -1,4 +1,5 @@
 import {
+
   $,
   $$,
   getDOMTodoFromElement,
@@ -8,6 +9,7 @@ import { TodoCreationController } from "../CONTROLLER/Controller";
 import { renderAsideFieldContent } from "./UI";
 import { LocalStorage, TodoLocalStorage } from "../STORAGE/LocalStorage";
 import { set } from "date-fns";
+
 
 const displayDailog = () => {
   //the dialog displayer button has that class and another one to differentiate dialogs
@@ -91,6 +93,8 @@ function setWarningDialogVisible() {
   warningDialog.classList.remove("hidden");
   //event delegation
   warningDialog.addEventListener("click", warningDialogEventDelegation);
+
+
 }
 
 function warningDialogEventDelegation(event) {
